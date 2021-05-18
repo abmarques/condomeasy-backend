@@ -1,4 +1,4 @@
-package com.condomeasy.backend.models;
+package com.condomeasy.backend.model;
 
 import lombok.Builder;
 import lombok.Data;

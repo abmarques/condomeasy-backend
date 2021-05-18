@@ -1,9 +1,8 @@
-package com.condomeasy.backend.models;
+package com.condomeasy.backend.model;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
