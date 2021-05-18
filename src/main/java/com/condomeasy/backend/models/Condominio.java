@@ -9,7 +9,15 @@ import javax.persistence.*;
 @Builder
 @Entity
 @Table(name = "tb_condominio")
-public class Condominio extends BaseModel{
+public class Condominio {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer Id;
+
+    @Column(name = "nome")
+    private String Nome;
 
     @Column(name = "cnpj")
     private String Cnpj;

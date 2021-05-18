@@ -9,5 +9,13 @@ import javax.persistence.*;
 @Builder
 @Entity
 @Table(name = "tb_categoria")
-public class Categoria extends BaseModel {
+public class Categoria {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer Id;
+
+    @Column(name = "nome")
+    private String Nome;
 }

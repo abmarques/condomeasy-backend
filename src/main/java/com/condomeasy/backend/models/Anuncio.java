@@ -10,7 +10,15 @@ import java.math.BigDecimal;
 @Builder
 @Entity
 @Table(name = "tb_anuncio")
-public class Anuncio extends BaseModel {
+public class Anuncio {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer Id;
+
+    @Column(name = "nome")
+    private String Nome;
 
     @Column(name = "descricao")
     private String Descricao;

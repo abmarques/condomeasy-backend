@@ -11,7 +11,15 @@ import java.time.LocalDate;
 @Builder
 @Entity
 @Table(name = "tb_usuario")
-public class Usuario extends BaseModel{
+public class Usuario {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer Id;
+
+    @Column(name = "nome")
+    private String Nome;
 
     @Column(name = "status")
     private String Status;
