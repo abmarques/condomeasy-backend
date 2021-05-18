@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @Builder
 @Entity
 @Table(name = "tb_anuncio")
-public class Anuncios extends BaseModel {
+public class Anuncio extends BaseModel {
 
     @Column(name = "descricao")
     private String Descricao;
