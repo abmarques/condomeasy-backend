@@ -1,0 +1,1 @@
+INSERT INTO teste (title) values ('teste');
