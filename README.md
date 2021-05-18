@@ -17,5 +17,4 @@
 > - CONDO_USER_DB_CONNECTION
 > - CONDO_PASSWORD_DB_CONNECTION
 
->[!WARNING]
 > :warning: Os valores das variáveis serão passados via whatsapp.
