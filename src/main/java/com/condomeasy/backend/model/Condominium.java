@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Builder
 @Entity
 @Table(name = "tb_condominio")
-public class Condominio {
+public class Condominium {
 
     @Id
     @Column(name = "id")
@@ -17,32 +17,32 @@ public class Condominio {
     private Integer Id;
 
     @Column(name = "nome")
-    private String Nome;
+    private String name;
 
     @Column(name = "cnpj")
-    private String Cnpj;
+    private String cnpj;
 
     @Column(name = "logradouro")
-    private String Logradouro;
+    private String adress;
 
     @Column(name = "complemento")
-    private String Complemento;
+    private String complement;
 
     @Column(name = "numero")
-    private Integer Numero;
+    private Integer number;
 
     @Column(name = "bairro")
-    private String Bairro;
+    private String neighborhood;
 
     @Column(name = "cidade")
-    private String Cidade;
+    private String city;
 
     @Column(name = "uf")
-    private String Uf;
+    private String uf;
 
     @Column(name = "localizacao_x")
-    private String LocalizacaoX;
+    private String localizationX;
 
     @Column(name = "localizacao_y")
-    private String LocalizacaoY;
+    private String localizationY;
 }

@@ -10,25 +10,25 @@ import java.math.BigDecimal;
 @Builder
 @Entity
 @Table(name = "tb_anuncio")
-public class Anuncio {
+public class Advertisement {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id;
+    private Integer id;
 
     @Column(name = "nome")
-    private String Nome;
+    private String name;
 
     @Column(name = "descricao")
-    private String Descricao;
+    private String description;
 
     @Column(name = "valor")
-    private BigDecimal Valor;
+    private BigDecimal value;
 
     @Column(name = "categoria_id")
-    private Integer CategoriaId;
+    private Integer categoryId;
 
     @Column(name = "usuario_id")
-    private Integer UsuarioId;
+    private Integer userId;
 }
