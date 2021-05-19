@@ -1,7 +1,0 @@
-package com.condomeasy.backend.repository;
-
-import com.condomeasy.backend.model.Perfil;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface PerfilRepository extends JpaRepository<Perfil, Integer> {
-}

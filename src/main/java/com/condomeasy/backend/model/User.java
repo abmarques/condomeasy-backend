@@ -10,52 +10,52 @@ import java.time.LocalDate;
 @Builder
 @Entity
 @Table(name = "tb_usuario")
-public class Usuario {
+public class User {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id;
+    private Integer id;
 
     @Column(name = "nome")
-    private String Nome;
+    private String name;
 
     @Column(name = "status")
-    private String Status;
+    private String status;
 
     @Column(name = "usuario")
-    private String Usuario;
+    private String user;
 
     @Column(name = "senha")
-    private String Senha;
+    private String password;
 
     @Column(name = "sobrenome")
-    private String Sobrenome;
+    private String surname;
 
     @Column(name = "cpf")
-    private String Cpf;
+    private String cpf;
 
     @Column(name = "telefone")
-    private String Telefone;
+    private String telephone;
 
     @Column(name = "email")
-    private String Email;
+    private String email;
 
     @Column(name = "numero_apto")
-    private String NumeroApto;
+    private String apartmentNumber;
 
     @Column(name = "bloco_apto")
-    private String BlocoApto;
+    private String apartmentBlock;
 
     @Column(name = "data_cadastro")
-    private LocalDate DataCadastro;
+    private LocalDate registrationDate;
 
     @Column(name = "data_ultima_atualizacao")
-    private LocalDate DataUltimaAtualizacao;
+    private LocalDate lastUpdateDate;
 
     @Column(name = "perfil_id")
-    private Integer PerfilId;
+    private Integer profileId;
 
     @Column(name = "condominio_id")
-    private Integer CondominioId;
+    private Integer condominiumId;
 }

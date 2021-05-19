@@ -8,14 +8,14 @@ import javax.persistence.*;
 @Data
 @Builder
 @Entity
-@Table(name = "tb_categoria")
-public class Categoria {
+@Table(name = "tb_perfil")
+public class Profile {
 
-    @Id
+    @javax.persistence.Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id;
+    private Integer id;
 
     @Column(name = "nome")
-    private String Nome;
+    private String name;
 }
