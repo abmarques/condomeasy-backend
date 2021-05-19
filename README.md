@@ -19,4 +19,25 @@
 
 * Passo 5. Após adicionar, reinicie o computador.
 
-> :warning: Os valores das variáveis serão passados via whatsapp.
+>[!WARNING]
+>Os valores das variáveis serão passados via whatsapp.
+
+> Rotas
+> - Adicionar usuário:
+>   - [POST] localhost:8080/user
+>   - JSON:
+> ```
+>{
+>	"nome": "",
+>	"blocoApto": "",
+>	"cpf": "",
+>	"usuario": "",
+>	"senha": "",
+>	"perfilId": 0,
+>	"numeroApto": 0,
+>	"condominioId": 0,
+>	"email": "",
+>	"telefone": "",
+>	"sobrenome": ""
+>}
+> ```

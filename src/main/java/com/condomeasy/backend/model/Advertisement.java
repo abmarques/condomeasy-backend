@@ -31,4 +31,5 @@ public class Advertisement {
 
     @Column(name = "usuario_id")
     private Integer userId;
+
 }

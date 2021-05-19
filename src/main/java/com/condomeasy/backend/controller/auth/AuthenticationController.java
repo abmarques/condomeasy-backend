@@ -2,7 +2,7 @@ package com.condomeasy.backend.controller.auth;
 
 import com.condomeasy.backend.dto.authentication.AuthenticationRequestDto;
 import com.condomeasy.backend.dto.authentication.AuthenticationResponseDto;
-import com.condomeasy.backend.service.DefaultUserDetailsService;
+import com.condomeasy.backend.service.auth.DefaultUserDetailsService;
 import com.condomeasy.backend.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;

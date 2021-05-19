@@ -14,7 +14,7 @@ public class Condominium {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id;
+    private Integer id;
 
     @Column(name = "nome")
     private String name;
@@ -45,4 +45,5 @@ public class Condominium {
 
     @Column(name = "localizacao_y")
     private String localizationY;
+
 }
