@@ -28,7 +28,7 @@ public class User {
     private String status;
 
     @Column(name = "usuario")
-    private String user;
+    private String username;
 
     @Column(name = "senha")
     private String password;
@@ -58,11 +58,11 @@ public class User {
     private LocalDate lastUpdateDate;
 
     @JoinColumn(name = "perfil_id", referencedColumnName = "id")
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
     private Profile profileId;
 
     @JoinColumn(name = "condominio_id", referencedColumnName = "id")
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
     private Condominium condominiumId;
 
 }

@@ -6,5 +6,6 @@ public interface IUserService {
 
 	User save(User u);
 	User findById(Integer id);
+	User findByUsername(String username);
 	
 }
