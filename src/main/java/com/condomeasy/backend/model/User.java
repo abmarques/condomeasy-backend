@@ -1,20 +1,24 @@
 package com.condomeasy.backend.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_usuario")
 public class User {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "nome")
@@ -53,9 +57,12 @@ public class User {
     @Column(name = "data_ultima_atualizacao")
     private LocalDate lastUpdateDate;
 
-    @Column(name = "perfil_id")
-    private Integer profileId;
+    @JoinColumn(name = "perfil_id", referencedColumnName = "id")
+	@OneToOne(fetch = FetchType.LAZY)
+    private Profile profileId;
 
-    @Column(name = "condominio_id")
-    private Integer condominiumId;
+    @JoinColumn(name = "condominio_id", referencedColumnName = "id")
+	@OneToOne(fetch = FetchType.LAZY)
+    private Condominium condominiumId;
+
 }

@@ -1,4 +1,4 @@
-package com.condomeasy.backend.service;
+package com.condomeasy.backend.service.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
