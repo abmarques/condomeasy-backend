@@ -22,4 +22,9 @@ public class UserService implements IUserService{
 		return repository.findById(id).get();
 	}
 
+	@Override
+	public User findByUsername(String username) {
+		return repository.findByUsername(username);
+	}
+
 }
