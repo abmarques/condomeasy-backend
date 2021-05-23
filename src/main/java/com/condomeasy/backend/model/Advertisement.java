@@ -1,5 +1,6 @@
 package com.condomeasy.backend.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import java.math.BigDecimal;
 
 @Data
 @Entity
+@Builder
 @Table(name = "tb_anuncio")
 public class Advertisement {
 
@@ -24,11 +26,11 @@ public class Advertisement {
     @Column(name = "valor")
     private BigDecimal value;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "categoria_id", referencedColumnName = "id")
     private Category category;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private User user;
 

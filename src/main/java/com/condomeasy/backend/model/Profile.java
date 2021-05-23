@@ -1,5 +1,6 @@
 package com.condomeasy.backend.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
+@Builder
 @Table(name = "tb_perfil")
 public class Profile {
 

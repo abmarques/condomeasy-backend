@@ -4,11 +4,10 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
-@Builder
 @Entity
+@Builder
 @Table(name = "tb_condominio")
 public class Condominium {
 
