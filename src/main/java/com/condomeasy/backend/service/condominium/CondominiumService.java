@@ -1,5 +1,7 @@
 package com.condomeasy.backend.service.condominium;
 
+import com.condomeasy.backend.dto.condominium.CondominiumDTO;
+import com.condomeasy.backend.mapper.CondominiumMapper;
 import com.condomeasy.backend.model.Condominium;
 import com.condomeasy.backend.repository.CondominiumRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -16,70 +18,77 @@ public class CondominiumService implements ICondominiumService{
     @Autowired
     private CondominiumRepository repository;
 
+    @Autowired
+    private CondominiumMapper mapper;
+
     @Override
-    public List<Condominium> getAll() {
-        return repository.findAll();
+    public List<CondominiumDTO> getAll() {
+        var modelList=  repository.findAll();
+
+        if (modelList.isEmpty()) return null;
+
+        return mapper.modelListToDtoListMap(modelList);
     }
 
     @Override
-    public Condominium save(Condominium c) {
-        var result = repository.save(c);
+    public CondominiumDTO save(CondominiumDTO dto) {
+        var model = repository.save(mapper.dtoToModelMap(dto));
 
-        log.info(String.format("Condominium '%s' saved successfully.", c.getName()));
+        log.info(String.format("Condominium '%s' saved successfully.", model.getName()));
 
-        return result;
+        return mapper.modelToDtoMap(model);
     }
 
     @Override
-    public Condominium findById(Integer id) {
-        return repository.findById(id).get();
+    public CondominiumDTO findById(Integer id) {
+        var model = repository.findById(id).get();
+
+        if(model == null) return null;
+
+        return mapper.modelToDtoMap(model);
     }
 
     @Override
-    public Condominium update(Condominium c, Integer id) {
-        Assert.notNull(id, "Não foi possível atualizar o registro. Favor, informar o id.");
+    public CondominiumDTO findByName(String name) {
+        Assert.notNull(name, "Não foi possível localizar o condomínio. Favor, informar o nome do condomínio.");
 
-        Condominium newCondominium = null;
+       var model = (repository.findByName(name));
+
+       if (model == null) return null;
+
+       return mapper.modelToDtoMap(model);
+    }
+
+    @Override
+    public CondominiumDTO update(CondominiumDTO dto, Integer id) {
+        Assert.notNull(id, "Não foi possível atualizar o condomínio. Favor, informar o id.");
+
+        Condominium model = null;
 
         var data = findById(id);
 
         if(data != null) {
-            newCondominium = Condominium.builder()
-                    .id(data.getId())
-                    .name(c.getName())
-                    .cnpj(c.getCnpj())
-                    .adress(c.getAdress())
-                    .complement(c.getComplement())
-                    .number(c.getNumber())
-                    .neighborhood(c.getNeighborhood())
-                    .city(c.getCity())
-                    .uf(c.getUf())
-                    .localizationX(c.getLocalizationX())
-                    .localizationY(c.getLocalizationY())
-                    .build();
-
-            repository.save(newCondominium);
-
+            dto.setId(data.getId());
+          model = repository.save(mapper.dtoToModelMap(dto));
         }else {
             throw new RuntimeException("Condomínio não encontrado na base de dados.");
         }
 
-        log.info(String.format("Condominium '%s' updated successfully.", c.getName()));
+        log.info(String.format("Condominium '%s' updated successfully.", model.getName()));
 
-        return newCondominium;
+        return mapper.modelToDtoMap(model);
     }
 
     @Override
     public void delete(Integer id) {
+        var dto = findById(id);
 
-        var result = findById(id);
-
-        if (result != null){
-            repository.delete(result);
+        if (dto != null){
+            repository.delete(mapper.dtoToModelMap(dto));
         }else {
             throw new RuntimeException("Condomínio não encontrado na base de dados.");
         }
 
-        log.info(String.format("Condominium '%s' deleted successfully.", result.getName()));
+        log.info(String.format("Condominium '%s' deleted successfully.", dto.getName()));
     }
 }
