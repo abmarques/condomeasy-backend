@@ -1,9 +1,16 @@
 package com.condomeasy.backend.repository;
 
-import com.condomeasy.backend.model.User;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.condomeasy.backend.model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    User findByUsername(String username);
+	Optional<User> findByUsername(String username);
+    
+    Optional<User> findByEmail(String email);
+    
+    Optional<User> findByCpf(String cpf);
 }

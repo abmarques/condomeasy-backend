@@ -17,9 +17,6 @@ import java.util.Set;
 public class DefaultUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private DefaultUserDetailsService defaultUserDetailsService;
-
-    @Autowired
     private IUserService userService;
 
     @Override
