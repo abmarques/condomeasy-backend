@@ -69,7 +69,7 @@ public class CondominiumService implements ICondominiumService{
 
         if(data != null) {
             dto.setId(data.getId());
-            repository.save(mapper.dtoToModelMap(dto));
+          model = repository.save(mapper.dtoToModelMap(dto));
         }else {
             throw new RuntimeException("Condomínio não encontrado na base de dados.");
         }
