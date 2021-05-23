@@ -23,19 +23,27 @@ public class CondominiumService implements ICondominiumService{
 
     @Override
     public List<CondominiumDTO> getAll() {
-        return mapper.modelListToDtoListMap(repository.findAll());
+        var modelList=  repository.findAll();
+
+        if (modelList.isEmpty()) return null;
+
+        return mapper.modelListToDtoListMap(modelList);
     }
 
     @Override
     public CondominiumDTO save(CondominiumDTO dto) {
         var model = repository.save(mapper.dtoToModelMap(dto));
+
         log.info(String.format("Condominium '%s' saved successfully.", model.getName()));
+
         return mapper.modelToDtoMap(model);
     }
 
     @Override
     public CondominiumDTO findById(Integer id) {
         var model = repository.findById(id).get();
+
+        if(model == null) return null;
 
         return mapper.modelToDtoMap(model);
     }
@@ -45,6 +53,7 @@ public class CondominiumService implements ICondominiumService{
         Assert.notNull(name, "Não foi possível localizar o condomínio. Favor, informar o nome do condomínio.");
 
        var model = (repository.findByName(name));
+
        if (model == null) return null;
 
        return mapper.modelToDtoMap(model);
@@ -53,8 +62,11 @@ public class CondominiumService implements ICondominiumService{
     @Override
     public CondominiumDTO update(CondominiumDTO dto, Integer id) {
         Assert.notNull(id, "Não foi possível atualizar o condomínio. Favor, informar o id.");
+
         Condominium model = null;
+
         var data = findById(id);
+
         if(data != null) {
             model = Condominium.builder()
                     .id(data.getId())
@@ -69,22 +81,28 @@ public class CondominiumService implements ICondominiumService{
                     .localizationX(dto.getLocalizationX())
                     .localizationY(dto.getLocalizationY())
                     .build();
+
             repository.save(model);
+
         }else {
             throw new RuntimeException("Condomínio não encontrado na base de dados.");
         }
+
         log.info(String.format("Condominium '%s' updated successfully.", model.getName()));
+
         return mapper.modelToDtoMap(model);
     }
 
     @Override
     public void delete(Integer id) {
         var dto = findById(id);
+
         if (dto != null){
             repository.delete(mapper.dtoToModelMap(dto));
         }else {
             throw new RuntimeException("Condomínio não encontrado na base de dados.");
         }
+
         log.info(String.format("Condominium '%s' deleted successfully.", dto.getName()));
     }
 }
