@@ -1,17 +1,12 @@
 package com.condomeasy.backend.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "tb_usuario")
 public class User {
@@ -57,12 +52,15 @@ public class User {
     @Column(name = "data_ultima_atualizacao")
     private LocalDate lastUpdateDate;
 
-    @JoinColumn(name = "perfil_id", referencedColumnName = "id")
-	@OneToOne(fetch = FetchType.EAGER)
-    private Profile profileId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "perfil_id", referencedColumnName = "id", nullable = false)
+    private Profile profile;
 
-    @JoinColumn(name = "condominio_id", referencedColumnName = "id")
-	@OneToOne(fetch = FetchType.EAGER)
-    private Condominium condominiumId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "condominio_id", referencedColumnName = "id", nullable = false)
+    private Condominium condominium;
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private List<Advertisement> advertisements;
 
 }

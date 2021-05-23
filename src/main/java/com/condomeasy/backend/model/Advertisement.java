@@ -1,13 +1,11 @@
 package com.condomeasy.backend.model;
 
-import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Data
-@Builder
 @Entity
 @Table(name = "tb_anuncio")
 public class Advertisement {
@@ -26,10 +24,12 @@ public class Advertisement {
     @Column(name = "valor")
     private BigDecimal value;
 
-    @Column(name = "categoria_id")
-    private Integer categoryId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoria_id", referencedColumnName = "id")
+    private Category category;
 
-    @Column(name = "usuario_id")
-    private Integer userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private User user;
 
 }

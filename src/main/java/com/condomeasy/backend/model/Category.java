@@ -1,12 +1,11 @@
 package com.condomeasy.backend.model;
 
-import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
-@Builder
 @Entity
 @Table(name = "tb_categoria")
 public class Category {
@@ -18,5 +17,8 @@ public class Category {
 
     @Column(name = "nome")
     private String name;
+
+    @OneToMany(mappedBy = "category")
+    private List<Advertisement> advertisements;
 
 }

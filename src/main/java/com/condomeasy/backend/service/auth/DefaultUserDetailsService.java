@@ -30,8 +30,8 @@ public class DefaultUserDetailsService implements UserDetailsService {
         if (user == null) throw new UsernameNotFoundException("username " + userName + " not found");
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority(user.getProfileId().getName()));
+        grantedAuthorities.add(new SimpleGrantedAuthority(user.getProfile().getName()));
         return new User(user.getUsername(), user.getPassword(), grantedAuthorities);
-
     }
+
 }
