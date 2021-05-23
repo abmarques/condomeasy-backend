@@ -1,1 +1,1 @@
-web: java -jar -Dspring.profiles.active=dev -Dserver.port=$PORT target/condomeasy-0.0.1-SNAPSHOT
+web: java -jar -Dspring.profiles.active=dev -Dserver.port=$PORT target/*.war
