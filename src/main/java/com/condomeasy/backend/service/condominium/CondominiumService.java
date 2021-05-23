@@ -68,22 +68,8 @@ public class CondominiumService implements ICondominiumService{
         var data = findById(id);
 
         if(data != null) {
-            model = Condominium.builder()
-                    .id(data.getId())
-                    .name(dto.getName())
-                    .cnpj(dto.getCnpj())
-                    .adress(dto.getAdress())
-                    .complement(dto.getComplement())
-                    .number(dto.getNumber())
-                    .neighborhood(dto.getNeighborhood())
-                    .city(dto.getCity())
-                    .uf(dto.getUf())
-                    .localizationX(dto.getLocalizationX())
-                    .localizationY(dto.getLocalizationY())
-                    .build();
-
-            repository.save(model);
-
+            dto.setId(data.getId());
+            repository.save(mapper.dtoToModelMap(dto));
         }else {
             throw new RuntimeException("Condomínio não encontrado na base de dados.");
         }
