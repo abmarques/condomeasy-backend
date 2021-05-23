@@ -5,16 +5,21 @@ import org.springframework.stereotype.Service;
 
 import com.condomeasy.backend.model.User;
 import com.condomeasy.backend.repository.UserRepository;
+import com.condomeasy.backend.validation.UserValidation;
 
 @Service
 public class UserService implements IUserService{
 	
 	@Autowired
 	private UserRepository repository;
+	@Autowired
+	private UserValidation userValidationService;
 
 	@Override
-	public User save(User usuario) {
-		return repository.save(usuario);
+	public User save(User user) {
+		user.setCpf(user.getCpf().replaceAll("[^0-9]", ""));
+		userValidationService.validateUser(user);
+		return repository.save(user);
 	}
 
 	@Override
@@ -24,7 +29,7 @@ public class UserService implements IUserService{
 
 	@Override
 	public User findByUsername(String username) {
-		return repository.findByUsername(username);
+		return repository.findByUsername(username).get();
 	}
 
 }

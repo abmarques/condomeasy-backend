@@ -22,7 +22,7 @@ public class UserDTO {
     private String status;
 
     @NotNull(message = "Informe o usuário")
-    private String user;
+    private String username;
 
     @NotNull(message = "Informe o senha do usuário")
     private String password;
