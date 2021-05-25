@@ -15,6 +15,6 @@ public class CategoryDTO {
 
     private Integer id;
 
-    @NotEmpty
+    @NotEmpty(message = "Informe o nome da categoria")
     private String name;
 }
