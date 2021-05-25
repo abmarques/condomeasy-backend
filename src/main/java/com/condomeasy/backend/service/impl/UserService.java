@@ -12,6 +12,8 @@ import com.condomeasy.backend.model.User;
 import com.condomeasy.backend.repository.UserRepository;
 import com.condomeasy.backend.validator.impl.UserValidator;
 
+import static com.condomeasy.backend.constants.MessageBundle.EMPTY_DATA;
+
 @Service
 public class UserService implements IUserService {
 	
@@ -35,7 +37,7 @@ public class UserService implements IUserService {
 	public UserDTO findById(Integer id) {
 		var model = repository.findById(id);
 
-		if(model.isEmpty()) throw new BusinessException("Usuário não encontrado.", HttpStatus.NOT_FOUND.value());
+		if(model.isEmpty()) throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
 
 		return UserMapper.modelToDtoMap(model.get());
 	}
@@ -44,7 +46,7 @@ public class UserService implements IUserService {
 	public UserDTO findByUsername(String username) {
 		var model = repository.findByUsername(username);
 
-		if(model.isEmpty()) throw new BusinessException("Usuário não encontrado.", HttpStatus.NOT_FOUND.value());
+		if(model.isEmpty()) throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
 
 		return UserMapper.modelToDtoMap(model.get());
 	}
