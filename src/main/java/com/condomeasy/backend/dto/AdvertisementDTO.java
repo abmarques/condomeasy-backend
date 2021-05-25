@@ -1,4 +1,4 @@
-package com.condomeasy.backend.dto.advertisement;
+package com.condomeasy.backend.dto;
 
 import com.condomeasy.backend.model.Category;
 import lombok.AllArgsConstructor;

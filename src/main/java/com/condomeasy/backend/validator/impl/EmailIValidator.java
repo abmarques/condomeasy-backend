@@ -5,13 +5,12 @@ import javax.mail.internet.InternetAddress;
 
 import com.condomeasy.backend.dto.UserDTO;
 import com.condomeasy.backend.exception.BusinessException;
-import com.condomeasy.backend.model.User;
-import com.condomeasy.backend.repository.UserRepository;
+import com.condomeasy.backend.repository.IUserRepository;
 import com.condomeasy.backend.validator.IValidator;
 
 public class EmailIValidator implements IValidator {
 	
-	private UserRepository userRepository;
+	private IUserRepository IUserRepository;
 	private IValidator proximo;
 
 	@Override
@@ -23,7 +22,7 @@ public class EmailIValidator implements IValidator {
 			throw new BusinessException("Email inválido");
 		}
 		
-		proximo.setUserRepository(userRepository);
+		proximo.setUserRepository(IUserRepository);
 		proximo.validate(user);
 	}
 
@@ -33,8 +32,8 @@ public class EmailIValidator implements IValidator {
 	}
 
 	@Override
-	public void setUserRepository(UserRepository userRepository) {
-		this.userRepository = userRepository;
+	public void setUserRepository(IUserRepository IUserRepository) {
+		this.IUserRepository = IUserRepository;
 	}
 
 }

@@ -4,14 +4,13 @@ import com.condomeasy.backend.dto.UserDTO;
 import com.condomeasy.backend.validator.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.condomeasy.backend.model.User;
-import com.condomeasy.backend.repository.UserRepository;
+import com.condomeasy.backend.repository.IUserRepository;
 
 @Service
 public class UserValidator {
 
 	@Autowired
-	private UserRepository userRepository;
+	private IUserRepository IUserRepository;
 
 	public boolean validateUser(UserDTO user) {
 
@@ -22,7 +21,7 @@ public class UserValidator {
 		final IValidator validateExistsCPF = new ExistsCPFIValidator();
 
 		validateExistsEmail.setProximo(validateEmail);
-		validateExistsEmail.setUserRepository(userRepository);
+		validateExistsEmail.setUserRepository(IUserRepository);
 		validateEmail.setProximo(validateUsername);
 		validateUsername.setProximo(validateCPF);
 		validateCPF.setProximo(validateExistsCPF);

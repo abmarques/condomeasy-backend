@@ -1,15 +1,14 @@
 package com.condomeasy.backend.service;
 
-import com.condomeasy.backend.dto.advertisement.AdvertisementDTO;
-import com.condomeasy.backend.model.Advertisement;
+import com.condomeasy.backend.dto.AdvertisementDTO;
 
 import java.util.List;
 
 public interface IAdvertisementService {
 
-    List<AdvertisementDTO> getAll();
+    List<AdvertisementDTO> findAll();
     AdvertisementDTO findById(Integer id);
-    AdvertisementDTO create(AdvertisementDTO dto);
+    AdvertisementDTO save(AdvertisementDTO dto);
     AdvertisementDTO update(AdvertisementDTO dto, Integer id);
     void delete(Integer c);
 

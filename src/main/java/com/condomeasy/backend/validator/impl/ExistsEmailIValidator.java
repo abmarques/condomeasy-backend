@@ -2,22 +2,21 @@ package com.condomeasy.backend.validator.impl;
 
 import com.condomeasy.backend.dto.UserDTO;
 import com.condomeasy.backend.exception.BusinessException;
-import com.condomeasy.backend.model.User;
-import com.condomeasy.backend.repository.UserRepository;
+import com.condomeasy.backend.repository.IUserRepository;
 import com.condomeasy.backend.validator.IValidator;
 
 public class ExistsEmailIValidator implements IValidator {
 	
-	private UserRepository userRepository;
+	private IUserRepository IUserRepository;
 	private IValidator proximo;
 
 	@Override
 	public void validate(UserDTO user) {
-		if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+		if (IUserRepository.findByEmail(user.getEmail()).isPresent()) {
 			throw new BusinessException("Email já existe.");
 		} 
 		
-		proximo.setUserRepository(userRepository);
+		proximo.setUserRepository(IUserRepository);
 		proximo.validate(user);
 	}
 
@@ -27,8 +26,8 @@ public class ExistsEmailIValidator implements IValidator {
 	}
 
 	@Override
-	public void setUserRepository(UserRepository userRepository) {
-		this.userRepository = userRepository;
+	public void setUserRepository(IUserRepository IUserRepository) {
+		this.IUserRepository = IUserRepository;
 	}
 
 }

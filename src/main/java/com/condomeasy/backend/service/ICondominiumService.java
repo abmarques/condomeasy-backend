@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ICondominiumService {
 
-    List<CondominiumDTO> getAll();
+    List<CondominiumDTO> findAll();
     CondominiumDTO save(CondominiumDTO c);
     CondominiumDTO update(CondominiumDTO c, Integer id);
     void delete(Integer c);

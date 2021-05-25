@@ -1,7 +1,7 @@
 package com.condomeasy.backend.controller;
 
-import com.condomeasy.backend.dto.AuthenticationRequestDto;
-import com.condomeasy.backend.dto.AuthenticationResponseDto;
+import com.condomeasy.backend.dto.AuthenticationRequestDTO;
+import com.condomeasy.backend.dto.AuthenticationResponseDTO;
 import com.condomeasy.backend.service.impl.DefaultUserDetailsService;
 import com.condomeasy.backend.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class AuthenticationController {
     private DefaultUserDetailsService defaultUserDetailsService;
 
     @PostMapping("/authenticate")
-    public AuthenticationResponseDto authenticate(@RequestBody AuthenticationRequestDto authenticationRequestDto) throws Exception {
+    public AuthenticationResponseDTO authenticate(@RequestBody AuthenticationRequestDTO authenticationRequestDto) throws Exception {
 
         try {
             authenticationManager.authenticate(
@@ -42,7 +42,7 @@ public class AuthenticationController {
         final UserDetails userDetails = defaultUserDetailsService.loadUserByUsername(authenticationRequestDto.getUsername());
         final String token = jwtUtil.generateToken(userDetails);
 
-        return new AuthenticationResponseDto(token);
+        return new AuthenticationResponseDTO(token);
     }
 
 }
