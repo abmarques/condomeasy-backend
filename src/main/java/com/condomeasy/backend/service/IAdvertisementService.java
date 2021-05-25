@@ -1,4 +1,4 @@
-package com.condomeasy.backend.service.advertisement;
+package com.condomeasy.backend.service;
 
 import com.condomeasy.backend.dto.advertisement.AdvertisementDTO;
 import com.condomeasy.backend.model.Advertisement;

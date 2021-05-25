@@ -1,9 +1,9 @@
-package com.condomeasy.backend.controller.advertisement;
+package com.condomeasy.backend.controller;
 
-import com.condomeasy.backend.controller.BaseController;
+import com.condomeasy.backend.controller.base.BaseController;
 import com.condomeasy.backend.dto.advertisement.AdvertisementDTO;
 import com.condomeasy.backend.response.Response;
-import com.condomeasy.backend.service.advertisement.IAdvertisementService;
+import com.condomeasy.backend.service.IAdvertisementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;

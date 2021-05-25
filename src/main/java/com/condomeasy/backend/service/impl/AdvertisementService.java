@@ -1,20 +1,18 @@
-package com.condomeasy.backend.service.advertisement;
+package com.condomeasy.backend.service.impl;
 
 import com.condomeasy.backend.dto.advertisement.AdvertisementDTO;
 import com.condomeasy.backend.exception.BusinessException;
 import com.condomeasy.backend.mapper.AdvertisementMapper;
-import com.condomeasy.backend.model.Advertisement;
 import com.condomeasy.backend.repository.AdvertisementRepository;
+import com.condomeasy.backend.service.IAdvertisementService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 import static com.condomeasy.backend.constants.MessageBundle.EMPTY_DATA;
-import static com.condomeasy.backend.mapper.AdvertisementMapper.*;
 
 @Slf4j
 @Service

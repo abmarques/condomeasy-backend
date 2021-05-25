@@ -14,6 +14,8 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
+import static com.condomeasy.backend.constants.MessageBundle.EMPTY_DATA;
+
 @Slf4j
 @Service
 public class CondominiumService implements ICondominiumService {
@@ -41,7 +43,7 @@ public class CondominiumService implements ICondominiumService {
     @Override
     public CondominiumDTO findById(Integer id) throws BusinessException{
         var model = repository.findById(id).get();
-        if(model == null) throw new BusinessException("EMPTY_DATA", HttpStatus.NOT_FOUND.value());
+        if(model == null) throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
 
         return CondominiumMapper.modelToDtoMap(model);
     }
@@ -49,7 +51,7 @@ public class CondominiumService implements ICondominiumService {
     @Override
     public CondominiumDTO findByName(String name) throws BusinessException{
        var model = (repository.findByName(name));
-       if (model == null) throw new BusinessException("EMPTY_DATA", HttpStatus.NOT_FOUND.value());
+       if (model == null) throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
 
        return CondominiumMapper.modelToDtoMap(model);
     }
@@ -57,7 +59,7 @@ public class CondominiumService implements ICondominiumService {
     @Override
     public CondominiumDTO update(CondominiumDTO dto, Integer id) throws BusinessException{
         var data = findById(id);
-        if(data == null) throw new BusinessException("EMPTY_DATA", HttpStatus.NOT_FOUND.value());
+        if(data == null) throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
 
         dto.setId(data.getId());
         var model = repository.save(CondominiumMapper.dtoToModelMap(dto));
@@ -70,7 +72,7 @@ public class CondominiumService implements ICondominiumService {
     @Override
     public void delete(Integer id) throws BusinessException{
         var dto = repository.findById(id);
-        if (dto.isEmpty()) throw new BusinessException("EMPTY_DATA", HttpStatus.NOT_FOUND.value());
+        if (dto.isEmpty()) throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
 
         repository.delete(dto.get());
 

@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.time.LocalDateTime;
 
+import static com.condomeasy.backend.constants.MessageBundle.TRANSACTION_SUCCESFUL;
 import static com.condomeasy.backend.util.HttpResponseUtil.getUri;
 
 @RestController
@@ -102,7 +103,7 @@ public class CondominiumController extends BaseController {
         var response = Response.builder()
                 .status(200)
                 .dateTime(LocalDateTime.now())
-                .message("Transação bem sucedida.")
+                .message(TRANSACTION_SUCCESFUL)
                 .build();
 
         return ResponseEntity.ok(response);
