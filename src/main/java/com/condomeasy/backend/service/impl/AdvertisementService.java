@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.condomeasy.backend.constants.MessageBundle.EMPTY_DATA;
+import static com.condomeasy.backend.constant.MessageBundle.EMPTY_DATA;
+import static com.condomeasy.backend.constant.MessageBundle.INTERNAL_ERROR;
 
 @Slf4j
 @Service
@@ -46,7 +47,7 @@ public class AdvertisementService implements IAdvertisementService {
         var model = repository.save(AdvertisementMapper.dtoToModelMap(dto));
 
         if(model == null)
-            throw new BusinessException("INTERNAL_ERROR", HttpStatus.BAD_REQUEST.value());
+            throw new BusinessException(INTERNAL_ERROR);
 
         return AdvertisementMapper.modelToDtoMap(model);
     }

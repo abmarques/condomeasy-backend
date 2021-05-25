@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.condomeasy.backend.constants.MessageBundle.EMPTY_DATA;
+import static com.condomeasy.backend.constant.MessageBundle.EMPTY_DATA;
+import static com.condomeasy.backend.constant.MessageBundle.INTERNAL_ERROR;
 
 @Slf4j
 @Service
@@ -36,7 +37,7 @@ public class CondominiumService implements ICondominiumService {
         var model = repository.save(CondominiumMapper.dtoToModelMap(dto));
 
         if(model == null)
-            throw new BusinessException("INTERNAL_ERROR", HttpStatus.NOT_FOUND.value());
+            throw new BusinessException(INTERNAL_ERROR);
 
         log.info(String.format("Condominium '%s' saved successfully.", model.getName()));
 

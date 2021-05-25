@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.time.LocalDateTime;
 
-import static com.condomeasy.backend.constants.MessageBundle.TRANSACTION_SUCCESFUL;
+import static com.condomeasy.backend.constant.MessageBundle.TRANSACTION_SUCCESFUL;
 import static com.condomeasy.backend.util.HttpResponseUtil.getUri;
 
 @RestController

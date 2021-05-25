@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.condomeasy.backend.repository.IUserRepository;
 import com.condomeasy.backend.validator.impl.UserValidator;
 
-import static com.condomeasy.backend.constants.MessageBundle.EMPTY_DATA;
+import static com.condomeasy.backend.constant.MessageBundle.EMPTY_DATA;
 
 @Service
 public class UserService implements IUserService {
