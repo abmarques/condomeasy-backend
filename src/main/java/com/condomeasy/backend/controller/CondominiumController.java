@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.time.LocalDateTime;
 
-import static com.condomeasy.backend.constants.MessageBundle.TRANSACTION_SUCCESFUL;
+import static com.condomeasy.backend.constant.MessageBundle.TRANSACTION_SUCCESFUL;
 import static com.condomeasy.backend.util.HttpResponseUtil.getUri;
 
 @RestController
@@ -22,19 +22,6 @@ public class CondominiumController extends BaseController {
 
     @Autowired
     private ICondominiumService service;
-
-    @GetMapping
-    public ResponseEntity<Response> getAll() {
-        var responseData = service.getAll();
-
-        var response = Response.builder()
-                .status(200)
-                .dateTime(LocalDateTime.now())
-                .data(responseData)
-                .build();
-
-        return ResponseEntity.ok(response);
-    }
 
     @PostMapping
     public ResponseEntity<Response> create(@Valid @RequestBody CondominiumDTO dto, BindingResult bindingResult) {
@@ -53,8 +40,21 @@ public class CondominiumController extends BaseController {
         return ResponseEntity.created(location).body(response);
     }
 
+    @GetMapping
+    public ResponseEntity<Response> findAll() {
+        var responseData = service.findAll();
+
+        var response = Response.builder()
+                .status(200)
+                .dateTime(LocalDateTime.now())
+                .data(responseData)
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/{id}")
-    public ResponseEntity<Response> getById(@PathVariable("id") Integer id) {
+    public ResponseEntity<Response> findById(@PathVariable("id") Integer id) {
         var responseData = service.findById(id);
 
         var response = Response.builder()
@@ -67,7 +67,7 @@ public class CondominiumController extends BaseController {
     }
 
     @GetMapping("name/{name}")
-    public ResponseEntity<Response> getByName(@PathVariable("name") String name) {
+    public ResponseEntity<Response> findByName(@PathVariable("name") String name) {
         var responseData = service.findByName(name);
 
         var response = Response.builder()
@@ -80,7 +80,7 @@ public class CondominiumController extends BaseController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Response> updateCondominium(
+    public ResponseEntity<Response> update(
             @PathVariable("id") Integer id, @Valid @RequestBody CondominiumDTO dto, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()) return invalidModelState(bindingResult);
@@ -97,7 +97,7 @@ public class CondominiumController extends BaseController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Response> deleteCondominium(@PathVariable Integer id) {
+    public ResponseEntity<Response> delete(@PathVariable Integer id) {
         service.delete(id);
 
         var response = Response.builder()

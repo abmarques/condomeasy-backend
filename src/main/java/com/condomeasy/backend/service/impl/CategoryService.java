@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.condomeasy.backend.constants.MessageBundle.EMPTY_DATA;
-import static com.condomeasy.backend.constants.MessageBundle.INTERNAL_SERVER_ERROR;
+import static com.condomeasy.backend.constant.MessageBundle.EMPTY_DATA;
+import static com.condomeasy.backend.constant.MessageBundle.INTERNAL_ERROR;
 
 @Slf4j
 @Service
@@ -33,7 +33,7 @@ public class CategoryService implements ICategoryService {
     @Override
     public CategoryDTO save(CategoryDTO dto) throws BusinessException {
         var model = repository.save(CategoryMapper.dtoToModelMap(dto));
-        if(model == null) throw new BusinessException(INTERNAL_SERVER_ERROR);
+        if(model == null) throw new BusinessException(INTERNAL_ERROR);
 
         log.info(String.format("Category '%s' saved successfully.", model.getName()));
 
@@ -56,7 +56,7 @@ public class CategoryService implements ICategoryService {
         dto.setId(data.get().getId());
         var model = repository.save(CategoryMapper.dtoToModelMap(dto));
 
-        if(model == null) throw new BusinessException(INTERNAL_SERVER_ERROR);
+        if(model == null) throw new BusinessException(INTERNAL_ERROR);
 
         log.info(String.format("Category '%s' updated successfully.", model.getName()));
 

@@ -1,9 +1,7 @@
 package com.condomeasy.backend.mapper;
 
-import com.condomeasy.backend.dto.UserDTO;
-import com.condomeasy.backend.dto.advertisement.AdvertisementDTO;
+import com.condomeasy.backend.dto.AdvertisementDTO;
 import com.condomeasy.backend.model.Advertisement;
-import com.condomeasy.backend.model.Profile;
 import com.condomeasy.backend.model.User;
 
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package com.condomeasy.backend.controller;
 
 import com.condomeasy.backend.controller.base.BaseController;
-import com.condomeasy.backend.dto.advertisement.AdvertisementDTO;
+import com.condomeasy.backend.dto.AdvertisementDTO;
 import com.condomeasy.backend.response.Response;
 import com.condomeasy.backend.service.IAdvertisementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.time.LocalDateTime;
 
-import static com.condomeasy.backend.constants.MessageBundle.TRANSACTION_SUCCESFUL;
+import static com.condomeasy.backend.constant.MessageBundle.TRANSACTION_SUCCESFUL;
 import static com.condomeasy.backend.util.HttpResponseUtil.getUri;
 
 @RestController
@@ -27,7 +27,7 @@ public class AdvertisementController extends BaseController {
     public ResponseEntity<Response> create(@Valid @RequestBody AdvertisementDTO dto, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) return invalidModelState(bindingResult);
 
-        var responseData = service.create(dto);
+        var responseData = service.save(dto);
 
         var response = Response.builder()
                 .status(200)
@@ -40,8 +40,8 @@ public class AdvertisementController extends BaseController {
     }
 
     @GetMapping
-    public ResponseEntity<Response> getAll() {
-        var responseData = service.getAll();
+    public ResponseEntity<Response> findAll() {
+        var responseData = service.findAll();
 
         var response = Response.builder()
                 .status(200)
@@ -53,7 +53,7 @@ public class AdvertisementController extends BaseController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Response> getById(@PathVariable("id") Integer id) {
+    public ResponseEntity<Response> findById(@PathVariable("id") Integer id) {
         var responseData = service.findById(id);
 
         var response = Response.builder()
