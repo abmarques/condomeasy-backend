@@ -1,13 +1,18 @@
 package com.condomeasy.backend.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "tb_usuario")
 public class User {
 
@@ -19,6 +24,9 @@ public class User {
     @Column(name = "nome")
     private String name;
 
+    @Column(name = "sobrenome")
+    private String surname;
+
     @Column(name = "status")
     private String status;
 
@@ -27,9 +35,6 @@ public class User {
 
     @Column(name = "senha")
     private String password;
-
-    @Column(name = "sobrenome")
-    private String surname;
 
     @Column(name = "cpf")
     private String cpf;
@@ -52,15 +57,12 @@ public class User {
     @Column(name = "data_ultima_atualizacao")
     private LocalDate lastUpdateDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "perfil_id", referencedColumnName = "id", nullable = false)
     private Profile profile;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "condominio_id", referencedColumnName = "id", nullable = false)
     private Condominium condominium;
-
-    @OneToMany(mappedBy = "user", orphanRemoval = true)
-    private List<Advertisement> advertisements;
 
 }

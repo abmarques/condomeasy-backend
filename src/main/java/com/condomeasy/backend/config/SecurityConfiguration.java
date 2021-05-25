@@ -1,7 +1,7 @@
 package com.condomeasy.backend.config;
 
 import com.condomeasy.backend.filter.AuthenticationRequestFilter;
-import com.condomeasy.backend.service.auth.DefaultUserDetailsService;
+import com.condomeasy.backend.service.impl.DefaultUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

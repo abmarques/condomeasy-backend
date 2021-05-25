@@ -1,13 +1,12 @@
 package com.condomeasy.backend.mapper;
 
-import com.condomeasy.backend.dto.condominium.CondominiumDTO;
+import com.condomeasy.backend.dto.CondominiumDTO;
 import com.condomeasy.backend.model.Condominium;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
 public class CondominiumMapper {
 
     public static Condominium dtoToModelMap(CondominiumDTO dto) {

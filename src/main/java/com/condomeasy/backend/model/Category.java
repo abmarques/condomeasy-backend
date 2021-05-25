@@ -18,7 +18,4 @@ public class Category {
     @Column(name = "nome")
     private String name;
 
-    @OneToMany(mappedBy = "category")
-    private List<Advertisement> advertisements;
-
 }
