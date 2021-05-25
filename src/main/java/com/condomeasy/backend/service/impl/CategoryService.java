@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.condomeasy.backend.constants.MessageBundle.EMPTY_DATA;
+import static com.condomeasy.backend.constants.MessageBundle.INTERNAL_SERVER_ERROR;
+
 @Slf4j
 @Service
 public class CategoryService implements ICategoryService {
@@ -22,7 +25,7 @@ public class CategoryService implements ICategoryService {
     @Override
     public List<CategoryDTO> findAll() throws BusinessException {
         var modelList = repository.findAll();
-        if(modelList.isEmpty()) throw new BusinessException("EMPTY_DATA", HttpStatus.NOT_FOUND.value());
+        if(modelList.isEmpty()) throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
 
         return CategoryMapper.modelListToDtoListMap(modelList);
     }
@@ -30,7 +33,7 @@ public class CategoryService implements ICategoryService {
     @Override
     public CategoryDTO save(CategoryDTO dto) throws BusinessException {
         var model = repository.save(CategoryMapper.dtoToModelMap(dto));
-        if(model == null) throw new BusinessException("INTERNAL_SERVER_ERROR");
+        if(model == null) throw new BusinessException(INTERNAL_SERVER_ERROR);
 
         log.info(String.format("Category '%s' saved successfully.", model.getName()));
 
@@ -40,7 +43,7 @@ public class CategoryService implements ICategoryService {
     @Override
     public CategoryDTO findById(Integer id) {
         var model = repository.findById(id);
-        if(model.isEmpty()) throw new BusinessException("EMPTY_DATA", HttpStatus.NOT_FOUND.value());
+        if(model.isEmpty()) throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
 
         return CategoryMapper.modelToDtoMap(model.get());
     }
@@ -48,12 +51,12 @@ public class CategoryService implements ICategoryService {
     @Override
     public CategoryDTO update(CategoryDTO dto, Integer id) {
         var data = repository.findById(id);
-        if(data.isEmpty()) throw new BusinessException("EMPTY_DATA", HttpStatus.NOT_FOUND.value());
+        if(data.isEmpty()) throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
 
         dto.setId(data.get().getId());
         var model = repository.save(CategoryMapper.dtoToModelMap(dto));
 
-        if(model == null) throw new BusinessException("INTERNAL_SERVER_ERROR");
+        if(model == null) throw new BusinessException(INTERNAL_SERVER_ERROR);
 
         log.info(String.format("Category '%s' updated successfully.", model.getName()));
 
@@ -63,7 +66,7 @@ public class CategoryService implements ICategoryService {
     @Override
     public void delete(Integer id) {
         var data = repository.findById(id);
-        if(data.isEmpty()) throw new BusinessException("EMPTY_DATA", HttpStatus.NOT_FOUND.value());
+        if(data.isEmpty()) throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
 
         repository.delete(data.get());
 
