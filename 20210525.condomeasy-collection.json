@@ -1,0 +1,606 @@
+{
+	"info": {
+		"_postman_id": "adaba24a-718d-4079-b15d-b14869f04fe1",
+		"name": "Condomeasy Backend API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "JWT Auth",
+			"item": [
+				{
+					"name": "Gerar Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.to.have.status(200)) {\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.environment.set(\"x-api-token\", jsonData.access_token)\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/condomeasy-backend-api/v1/authenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"condomeasy-backend-api",
+								"v1",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Requests",
+			"item": [
+				{
+					"name": "Advertisement",
+					"item": [
+						{
+							"name": "Advertisements",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost_url}}/condomeasy-backend-api/v1/advertisement",
+									"host": [
+										"{{localhost_url}}"
+									],
+									"path": [
+										"condomeasy-backend-api",
+										"v1",
+										"advertisement"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Advertisement",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost_url}}/condomeasy-backend-api/v1/advertisement/:id",
+									"host": [
+										"{{localhost_url}}"
+									],
+									"path": [
+										"condomeasy-backend-api",
+										"v1",
+										"advertisement",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Advertisement",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Refeição e Janta 2\",\r\n    \"description\": \"Almoço e Janta na hora.\",\r\n    \"value\": 100.00,\r\n    \"category\": {\r\n        \"id\": 8,\r\n        \"name\": \"Comida\"\r\n    },\r\n    \"userId\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost_url}}/condomeasy-backend-api/v1/advertisement/",
+									"host": [
+										"{{localhost_url}}"
+									],
+									"path": [
+										"condomeasy-backend-api",
+										"v1",
+										"advertisement",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Advertisement",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Refeição e Janta Update 4\",\r\n    \"description\": \"Almoço e Janta na hora.\",\r\n    \"value\": 100.0,\r\n    \"category\": {\r\n        \"id\": 8,\r\n        \"name\": \"Serviços\",\r\n        \"advertisements\": null\r\n    },\r\n    \"userId\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost_url}}/condomeasy-backend-api/v1/advertisement/:id",
+									"host": [
+										"{{localhost_url}}"
+									],
+									"path": [
+										"condomeasy-backend-api",
+										"v1",
+										"advertisement",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Advertisement",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost_url}}/condomeasy-backend-api/v1/advertisement/:id",
+									"host": [
+										"{{localhost_url}}"
+									],
+									"path": [
+										"condomeasy-backend-api",
+										"v1",
+										"advertisement",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Condominium",
+					"item": [
+						{
+							"name": "Condominium",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Condomínio Boa Viagem\",\r\n    \"cnpj\": \"40229707000199\",\r\n    \"adress\": \"Avenida Boa Viagem\",\r\n    \"complement\": \"\",\r\n    \"number\": 900,\r\n    \"neighborhood\": \"Boa Viagem\",\r\n    \"city\": \"Recife\",\r\n    \"uf\": \"PE\",\r\n    \"localizationX\": \"-8.127144374633192\",\r\n    \"localizationY\": \"-34.89785603776489\" \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost_url}}/condomeasy-backend-api/v1/condominium",
+									"host": [
+										"{{localhost_url}}"
+									],
+									"path": [
+										"condomeasy-backend-api",
+										"v1",
+										"condominium"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Condominiums",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjIxNDAzMTU1LCJpYXQiOjE2MjE0MDMxNTF9.WQ8vatco8PCnzHY2850mZSxPkd7m_RkHx7UbcJbeDT0",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{localhost_url}}/condomeasy-backend-api/v1/condominium",
+									"host": [
+										"{{localhost_url}}"
+									],
+									"path": [
+										"condomeasy-backend-api",
+										"v1",
+										"condominium"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Condominium",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost_url}}/condomeasy-backend-api/v1/condominium/:id",
+									"host": [
+										"{{localhost_url}}"
+									],
+									"path": [
+										"condomeasy-backend-api",
+										"v1",
+										"condominium",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Condominium",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 7,\r\n    \"name\": \"Condomínio Olinda\",\r\n    \"cnpj\": \"40229707000199\",\r\n    \"adress\": \"Avenida Olinda\",\r\n    \"complement\": \"\",\r\n    \"number\": 143,\r\n    \"neighborhood\": \"Olinda\",\r\n    \"city\": \"Olinda\",\r\n    \"uf\": \"PE\",\r\n    \"localizationX\": \"-8.062533466228373\",\r\n    \"localizationY\": \"-34.873264390963605\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost_url}}/condomeasy-backend-api/v1/condominium/:id",
+									"host": [
+										"{{localhost_url}}"
+									],
+									"path": [
+										"condomeasy-backend-api",
+										"v1",
+										"condominium",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Condominium",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{localhost_url}}/condomeasy-backend-api/v1/condominium/:id",
+									"host": [
+										"{{localhost_url}}"
+									],
+									"path": [
+										"condomeasy-backend-api",
+										"v1",
+										"condominium",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "9"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find By Name",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost_url}}/condomeasy-backend-api/v1/condominium/name/:name",
+									"host": [
+										"{{localhost_url}}"
+									],
+									"path": [
+										"condomeasy-backend-api",
+										"v1",
+										"condominium",
+										"name",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": "Condomínio Olinda"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Category",
+					"item": [
+						{
+							"name": "Categories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost_url}}/condomeasy-backend-api/v1/category",
+									"host": [
+										"{{localhost_url}}"
+									],
+									"path": [
+										"condomeasy-backend-api",
+										"v1",
+										"category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Category",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost_url}}/condomeasy-backend-api/v1/category/:id",
+									"host": [
+										"{{localhost_url}}"
+									],
+									"path": [
+										"condomeasy-backend-api",
+										"v1",
+										"category",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Category",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Teste Inclusao\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost_url}}/condomeasy-backend-api/v1/category/:id",
+									"host": [
+										"{{localhost_url}}"
+									],
+									"path": [
+										"condomeasy-backend-api",
+										"v1",
+										"category",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Category",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Teste Inclusao Update\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost_url}}/condomeasy-backend-api/v1/category/:id",
+									"host": [
+										"{{localhost_url}}"
+									],
+									"path": [
+										"condomeasy-backend-api",
+										"v1",
+										"category",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "13"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Category",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Teste Inclusao Update\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost_url}}/condomeasy-backend-api/v1/category/:id",
+									"host": [
+										"{{localhost_url}}"
+									],
+									"path": [
+										"condomeasy-backend-api",
+										"v1",
+										"category",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "13"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{x-api-token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
