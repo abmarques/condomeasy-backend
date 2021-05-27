@@ -7,17 +7,19 @@ import com.condomeasy.backend.validator.IValidator;
 
 public class ExistsUsernameIValidator implements IValidator {
 	
-	private IUserRepository IUserRepository;
+	private IUserRepository userRepository;
 	private IValidator proximo;
 
 	@Override
 	public void validate(UserDTO user) {
-		if (IUserRepository.findByUsername(user.getUsername()).isPresent()) {
+		if (userRepository.findByUsername(user.getUsername()).isPresent()) {
 			throw new BusinessException("Usuário já existe.");
 		}
 		
-		proximo.setUserRepository(IUserRepository);
-		proximo.validate(user);
+		if (proximo != null) {
+			proximo.setUserRepository(userRepository);
+			proximo.validate(user);
+		}
 	}
 	
 	@Override
@@ -26,8 +28,13 @@ public class ExistsUsernameIValidator implements IValidator {
 	}
 
 	@Override
-	public void setUserRepository(IUserRepository IUserRepository) {
-		this.IUserRepository = IUserRepository;
+	public void setUserRepository(IUserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+	
+	@Override
+	public IValidator getProximo() {
+		return this.proximo;
 	}
 
 
