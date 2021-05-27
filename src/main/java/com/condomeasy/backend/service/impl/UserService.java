@@ -4,6 +4,7 @@ import static com.condomeasy.backend.constant.MessageBundle.EMPTY_DATA;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.condomeasy.backend.dto.UserDTO;
@@ -19,13 +20,16 @@ public class UserService implements IUserService {
 
 	@Autowired
 	private IUserRepository repository;
-
 	@Autowired
 	private UserValidator userValidatorService;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Override
 	public User save(UserDTO dto) throws BusinessException {
 		dto.setCpf(dto.getCpf().replaceAll("[^0-9]", ""));
+		dto.setPassword(passwordEncoder.encode(dto.getPassword()));
+		
 		userValidatorService.validateUser(dto);
 
 		return repository.save(UserMapper.dtoToModelMap(dto));
@@ -60,11 +64,9 @@ public class UserService implements IUserService {
 		
 		dto.setCpf(dto.getCpf().replaceAll("[^0-9]", ""));
 		dto.setId(data.get().getId());
+		dto.setPassword(passwordEncoder.encode(dto.getPassword()));
 		
 		userValidatorService.validateUserUpdate(dto, data.get());
-		
-		System.out.println(dto.getCpf());
-		System.out.println(data.get().getCpf());
 
 		return repository.save(UserMapper.dtoToModelMap(dto));
 	}

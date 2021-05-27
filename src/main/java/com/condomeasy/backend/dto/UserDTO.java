@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +30,7 @@ public class UserDTO {
     private String username;
 
     @NotEmpty(message = "Informe o senha do usuário.")
+    @Length(min = 8, message = "A senha deve conter no mínimo 8 caracteres.")
     private String password;
 
     @NotEmpty(message = "Informe o sobrenome do usuário.")
