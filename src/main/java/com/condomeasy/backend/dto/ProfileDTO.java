@@ -14,6 +14,6 @@ import lombok.NoArgsConstructor;
 public class ProfileDTO {
 
 	private Integer id;
-	@NotEmpty(message = "Informe o email do perfil.")
+	@NotEmpty(message = "Informe o nome do perfil.")
 	private String name;
 }
