@@ -9,7 +9,7 @@ import com.condomeasy.backend.validator.IValidator;
 
 public class CPFIValidator implements IValidator {
 
-	private IUserRepository IUserRepository;
+	private IUserRepository userRepository;
 	private IValidator proximo;
 
 	@Override
@@ -62,8 +62,10 @@ public class CPFIValidator implements IValidator {
 			throw new BusinessException("CPF inválido.");
 		}
 
-		proximo.setUserRepository(IUserRepository);
-		proximo.validate(user);
+		if (proximo != null) {
+			proximo.setUserRepository(userRepository);
+			proximo.validate(user);
+		}
 	}
 
 	@Override
@@ -72,8 +74,13 @@ public class CPFIValidator implements IValidator {
 	}
 
 	@Override
-	public void setUserRepository(IUserRepository IUserRepository) {
-		this.IUserRepository = IUserRepository;
+	public void setUserRepository(IUserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+
+	@Override
+	public IValidator getProximo() {
+		return this.proximo;
 	}
 
 }

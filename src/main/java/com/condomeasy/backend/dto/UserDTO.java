@@ -1,15 +1,16 @@
 package com.condomeasy.backend.dto;
 
-import com.condomeasy.backend.model.Condominium;
-import com.condomeasy.backend.model.Profile;
+import java.time.LocalDate;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 
 @Data
 @Builder
@@ -29,6 +30,7 @@ public class UserDTO {
     private String username;
 
     @NotEmpty(message = "Informe o senha do usuário.")
+    @Length(min = 8, message = "A senha deve conter no mínimo 8 caracteres.")
     private String password;
 
     @NotEmpty(message = "Informe o sobrenome do usuário.")
@@ -54,8 +56,8 @@ public class UserDTO {
     private LocalDate lastUpdateDate;
 
     @NotNull(message = "Informe o perfil do usuário")
-    private Profile profile;
+    private Integer profileId;
 
     @NotNull(message = "Informe o condomínio do usuário")
-    private Condominium condominium;
+    private Integer condominiumId;
 }
