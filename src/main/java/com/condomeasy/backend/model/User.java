@@ -1,12 +1,23 @@
 package com.condomeasy.backend.model;
 
+import java.time.LocalDate;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.DynamicUpdate;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.time.LocalDate;
 
 @Data
 @Entity
@@ -14,6 +25,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_usuario")
+@DynamicUpdate
 public class User {
 
     @Id
@@ -57,12 +69,14 @@ public class User {
     @Column(name = "data_ultima_atualizacao")
     private LocalDate lastUpdateDate;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "perfil_id", referencedColumnName = "id", nullable = false)
-    private Profile profile;
+    @Builder.Default
+    private Profile profile = new Profile();
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "condominio_id", referencedColumnName = "id", nullable = false)
-    private Condominium condominium;
+    @Builder.Default
+    private Condominium condominium = new Condominium();
 
 }

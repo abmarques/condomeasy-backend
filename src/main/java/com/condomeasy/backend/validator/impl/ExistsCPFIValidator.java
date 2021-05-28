@@ -7,22 +7,34 @@ import com.condomeasy.backend.validator.IValidator;
 
 public class ExistsCPFIValidator implements IValidator {
 
-	private IUserRepository IUserRepository;
+	private IUserRepository userRepository;
+	private IValidator proximo;
 
 	@Override
 	public void validate(UserDTO user) {
-		if (IUserRepository.findByCpf(user.getCpf()).isPresent()) {
+		if (userRepository.findByCpf(user.getCpf()).isPresent()) {
 			throw new BusinessException("CPF já existe.");
+		}
+		
+		if (proximo != null) {
+			proximo.setUserRepository(userRepository);
+			proximo.validate(user);
 		}
 	}
 
 	@Override
 	public void setProximo(IValidator proximo) {
+		this.proximo = proximo;
 	}
 
 	@Override
-	public void setUserRepository(IUserRepository IUserRepository) {
-		this.IUserRepository = IUserRepository;
+	public void setUserRepository(IUserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+	
+	@Override
+	public IValidator getProximo() {
+		return null;
 	}
 
 }

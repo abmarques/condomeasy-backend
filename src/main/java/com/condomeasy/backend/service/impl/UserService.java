@@ -1,55 +1,80 @@
 package com.condomeasy.backend.service.impl;
 
+import static com.condomeasy.backend.constant.MessageBundle.EMPTY_DATA;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import com.condomeasy.backend.dto.UserDTO;
 import com.condomeasy.backend.exception.BusinessException;
 import com.condomeasy.backend.mapper.UserMapper;
-import com.condomeasy.backend.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-
+import com.condomeasy.backend.model.User;
 import com.condomeasy.backend.repository.IUserRepository;
+import com.condomeasy.backend.service.IUserService;
 import com.condomeasy.backend.validator.impl.UserValidator;
-
-import static com.condomeasy.backend.constant.MessageBundle.EMPTY_DATA;
 
 @Service
 public class UserService implements IUserService {
-	
+
 	@Autowired
 	private IUserRepository repository;
-
 	@Autowired
 	private UserValidator userValidatorService;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Override
-	public UserDTO save(UserDTO dto) throws BusinessException{
+	public User save(UserDTO dto) throws BusinessException {
 		dto.setCpf(dto.getCpf().replaceAll("[^0-9]", ""));
+		dto.setPassword(passwordEncoder.encode(dto.getPassword()));
+		
 		userValidatorService.validateUser(dto);
 
-		var model = repository.save(UserMapper.dtoToModelMap(dto));
-
-		return UserMapper.modelToDtoMap(model);
+		return repository.save(UserMapper.dtoToModelMap(dto));
 	}
 
 	@Override
-	public UserDTO findById(Integer id) {
+	public User findById(Integer id) {
 		var model = repository.findById(id);
 
-		if(model.isEmpty())
+		if (model.isEmpty())
 			throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
 
-		return UserMapper.modelToDtoMap(model.get());
+		return model.get();
 	}
 
 	@Override
-	public UserDTO findByUsername(String username) {
+	public User findByUsername(String username) {
 		var model = repository.findByUsername(username);
 
-		if(model.isEmpty())
+		if (model.isEmpty())
 			throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
 
-		return UserMapper.modelToDtoMap(model.get());
+		return model.get();
+	}
+
+	@Override
+	public User update(UserDTO dto, Integer id) {
+		var data = repository.findById(id);
+
+		if (data.isEmpty())
+			throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
+		
+		dto.setCpf(dto.getCpf().replaceAll("[^0-9]", ""));
+		dto.setId(data.get().getId());
+		dto.setPassword(passwordEncoder.encode(dto.getPassword()));
+		
+		userValidatorService.validateUserUpdate(dto, data.get());
+
+		return repository.save(UserMapper.dtoToModelMap(dto));
+	}
+
+	@Override
+	public void delete(UserDTO dto) {
+
+		repository.delete(UserMapper.dtoToModelMap(dto));
 	}
 
 }

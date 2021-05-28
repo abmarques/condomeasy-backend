@@ -9,5 +9,7 @@ public interface IValidator {
     
     void setUserRepository(IUserRepository IUserRepository);
  
+    IValidator getProximo();
+    
     void setProximo(IValidator proximo);
 }

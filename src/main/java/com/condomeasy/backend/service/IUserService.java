@@ -5,8 +5,10 @@ import com.condomeasy.backend.model.User;
 
 public interface IUserService {
 
-	UserDTO save(UserDTO u);
-	UserDTO findById(Integer id);
-	UserDTO findByUsername(String username);
+	User save(UserDTO u);
+	void delete(UserDTO u);
+	User update(UserDTO dto, Integer id);
+	User findById(Integer id);
+	User findByUsername(String username);
 	
 }

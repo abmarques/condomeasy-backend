@@ -10,7 +10,7 @@ import com.condomeasy.backend.validator.IValidator;
 
 public class EmailIValidator implements IValidator {
 	
-	private IUserRepository IUserRepository;
+	private IUserRepository userRepository;
 	private IValidator proximo;
 
 	@Override
@@ -22,8 +22,10 @@ public class EmailIValidator implements IValidator {
 			throw new BusinessException("Email inválido");
 		}
 		
-		proximo.setUserRepository(IUserRepository);
-		proximo.validate(user);
+		if (proximo != null) {
+			proximo.setUserRepository(userRepository);
+			proximo.validate(user);
+		}
 	}
 
 	@Override
@@ -32,8 +34,13 @@ public class EmailIValidator implements IValidator {
 	}
 
 	@Override
-	public void setUserRepository(IUserRepository IUserRepository) {
-		this.IUserRepository = IUserRepository;
+	public void setUserRepository(IUserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+
+	@Override
+	public IValidator getProximo() {
+		return this.proximo;
 	}
 
 }
