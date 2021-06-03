@@ -1,6 +1,6 @@
 package com.condomeasy.backend.service.impl;
 
-import static com.condomeasy.backend.constant.MessageBundle.EMPTY_DATA;
+import static com.condomeasy.backend.constant.MessageBundle.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -75,6 +75,20 @@ public class UserService implements IUserService {
 	public void delete(UserDTO dto) {
 
 		repository.delete(UserMapper.dtoToModelMap(dto));
+	}
+
+	@Override
+	public User findByUsernameAndPassoword(String username, String password) {
+
+		var model = repository.findByUsername(username);
+		
+		System.out.println(passwordEncoder.matches(password, model.get().getPassword()));
+
+		if (model.isEmpty() || 
+					!passwordEncoder.matches(password, model.get().getPassword()))
+			throw new BusinessException(USER_NOT_FOUND, HttpStatus.NOT_FOUND.value());
+
+		return model.get();
 	}
 
 }
