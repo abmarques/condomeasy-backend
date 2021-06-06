@@ -2,6 +2,7 @@ package com.condomeasy.backend.dto;
 
 import javax.validation.constraints.NotEmpty;
 
+import com.condomeasy.backend.dto.base.BaseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,9 +12,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProfileDTO {
+public class ProfileDTO extends BaseDTO {
 
-	private Integer id;
 	@NotEmpty(message = "Informe o nome do perfil.")
 	private String name;
 }

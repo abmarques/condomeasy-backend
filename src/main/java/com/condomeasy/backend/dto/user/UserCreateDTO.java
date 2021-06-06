@@ -1,24 +1,21 @@
-package com.condomeasy.backend.dto;
+package com.condomeasy.backend.dto.user;
 
-import java.time.LocalDate;
-
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Length;
-
+import com.condomeasy.backend.dto.base.DefaultDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO {
-	
-    private Integer id;
+public class UserCreateDTO extends DefaultDTO {
 
     @NotEmpty(message = "Informe o nome do usuário.")
     private String name;
@@ -27,6 +24,7 @@ public class UserDTO {
     private String status;
 
     @NotEmpty(message = "Informe o usuário.")
+    @Length(min = 1, max = 20, message = "O usuário deve conter entre 1 a 20 caracteres.")
     private String username;
 
     @NotEmpty(message = "Informe o senha do usuário.")
@@ -51,13 +49,12 @@ public class UserDTO {
     @NotEmpty(message = "Informe o bloco do usuário")
     private String apartmentBlock;
 
-    private LocalDate registrationDate;
-
-    private LocalDate lastUpdateDate;
-
     @NotNull(message = "Informe o perfil do usuário")
     private Integer profileId;
 
     @NotNull(message = "Informe o condomínio do usuário")
     private Integer condominiumId;
+
+    private LocalDateTime registrationDate;
+
 }

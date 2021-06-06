@@ -1,19 +1,25 @@
 package com.condomeasy.backend.validator.impl;
 
-import com.condomeasy.backend.dto.UserDTO;
+import com.condomeasy.backend.dto.user.UserCreateDTO;
 import com.condomeasy.backend.exception.BusinessException;
 import com.condomeasy.backend.repository.IUserRepository;
 import com.condomeasy.backend.validator.IValidator;
 
-public class ExistsCPFIValidator implements IValidator {
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 
+public class EmailValidator implements IValidator {
+	
 	private IUserRepository userRepository;
 	private IValidator proximo;
 
 	@Override
-	public void validate(UserDTO user) {
-		if (userRepository.findByCpf(user.getCpf()).isPresent()) {
-			throw new BusinessException("CPF já existe.");
+	public void validate(UserCreateDTO user) {
+		try {
+			InternetAddress emailAddr = new InternetAddress(user.getEmail());
+			emailAddr.validate();
+		} catch (AddressException e) {
+			throw new BusinessException("Email inválido");
 		}
 		
 		if (proximo != null) {
@@ -31,10 +37,10 @@ public class ExistsCPFIValidator implements IValidator {
 	public void setUserRepository(IUserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
-	
+
 	@Override
 	public IValidator getProximo() {
-		return null;
+		return this.proximo;
 	}
 
 }

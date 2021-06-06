@@ -1,19 +1,19 @@
 package com.condomeasy.backend.validator.impl;
 
-import java.util.InputMismatchException;
-
-import com.condomeasy.backend.dto.UserDTO;
+import com.condomeasy.backend.dto.user.UserCreateDTO;
 import com.condomeasy.backend.exception.BusinessException;
 import com.condomeasy.backend.repository.IUserRepository;
 import com.condomeasy.backend.validator.IValidator;
 
-public class CPFIValidator implements IValidator {
+import java.util.InputMismatchException;
+
+public class CPFValidator implements IValidator {
 
 	private IUserRepository userRepository;
 	private IValidator proximo;
 
 	@Override
-	public void validate(UserDTO user) {
+	public void validate(UserCreateDTO user) {
 		if (user.getCpf().equals("00000000000") || user.getCpf().equals("11111111111")
 				|| user.getCpf().equals("22222222222") || user.getCpf().equals("33333333333")
 				|| user.getCpf().equals("44444444444") || user.getCpf().equals("55555555555")

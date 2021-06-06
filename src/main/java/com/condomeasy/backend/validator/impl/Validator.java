@@ -1,6 +1,6 @@
 package com.condomeasy.backend.validator.impl;
 
-import com.condomeasy.backend.dto.UserDTO;
+import com.condomeasy.backend.dto.user.UserCreateDTO;
 import com.condomeasy.backend.repository.IUserRepository;
 import com.condomeasy.backend.validator.IValidator;
 
@@ -10,7 +10,7 @@ public class Validator implements IValidator {
 	private IValidator proximo;
 
 	@Override
-	public void validate(UserDTO user) {
+	public void validate(UserCreateDTO user) {
 		if (proximo != null) {
 			proximo.setUserRepository(userRepository);
 			proximo.validate(user);

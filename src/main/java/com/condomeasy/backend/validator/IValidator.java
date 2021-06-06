@@ -1,11 +1,12 @@
 package com.condomeasy.backend.validator;
 
-import com.condomeasy.backend.dto.UserDTO;
+import com.condomeasy.backend.dto.user.UserCreateDTO;
+import com.condomeasy.backend.dto.user.UserDTO;
 import com.condomeasy.backend.repository.IUserRepository;
 
 public interface IValidator {
 	 
-    void validate(UserDTO user);
+    void validate(UserCreateDTO dto);
     
     void setUserRepository(IUserRepository IUserRepository);
  

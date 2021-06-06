@@ -1,9 +1,11 @@
 package com.condomeasy.backend.validator.impl;
 
+import com.condomeasy.backend.dto.user.UserCreateDTO;
+import com.condomeasy.backend.dto.user.UserUpdateDTO;
+import com.condomeasy.backend.exception.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.condomeasy.backend.dto.UserDTO;
 import com.condomeasy.backend.model.User;
 import com.condomeasy.backend.repository.IUserRepository;
 import com.condomeasy.backend.validator.IValidator;
@@ -14,13 +16,13 @@ public class UserValidator {
 	@Autowired
 	private IUserRepository userRepository;
 
-	public boolean validateUser(UserDTO user) {
+	public boolean validateUserCreate(UserCreateDTO user) throws BusinessException {
 
-		final IValidator validateExistsEmail = new ExistsEmailIValidator();
-		final IValidator validateEmail = new EmailIValidator();
-		final IValidator validateUsername = new ExistsUsernameIValidator();
-		final IValidator validateCPF = new CPFIValidator();
-		final IValidator validateExistsCPF = new ExistsCPFIValidator();
+		final IValidator validateExistsEmail = new ExistsEmailValidator();
+		final IValidator validateEmail = new EmailValidator();
+		final IValidator validateUsername = new UsernameValidator();
+		final IValidator validateCPF = new CPFValidator();
+		final IValidator validateExistsCPF = new ExistsCPFValidator();
 
 		validateExistsEmail.setProximo(validateEmail);
 		validateExistsEmail.setUserRepository(userRepository);
@@ -33,13 +35,13 @@ public class UserValidator {
 		return true;
 	}
 	
-	public boolean validateUserUpdate(UserDTO userDTO, User user) {
+	public boolean validateUserUpdate(UserUpdateDTO userDTO, User user) throws BusinessException {
 
 		final IValidator validator = new Validator();
-		final IValidator validateExistsEmail = new ExistsEmailIValidator();
-		final IValidator validateUsername = new ExistsUsernameIValidator();
-		final IValidator validateCPF = new CPFIValidator();
-		final IValidator validateExistsCPF = new ExistsCPFIValidator();
+		final IValidator validateExistsEmail = new ExistsEmailValidator();
+		final IValidator validateUsername = new UsernameValidator();
+		final IValidator validateCPF = new CPFValidator();
+		final IValidator validateExistsCPF = new ExistsCPFValidator();
 
 		if(!userDTO.getCpf().equals(user.getCpf())) {
 			validator.setProximo(validateExistsCPF);
