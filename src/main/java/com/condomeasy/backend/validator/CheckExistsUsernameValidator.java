@@ -1,5 +1,6 @@
 package com.condomeasy.backend.validator;
 
+import com.condomeasy.backend.exception.BusinessException;
 import com.condomeasy.backend.service.IUserService;
 import com.condomeasy.backend.validator.annotation.ExistsUsernameValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class CheckExistsUsernamevalidator implements ConstraintValidator<ExistsUsernameValidator, String>  {
+
+public class CheckExistsUsernameValidator implements ConstraintValidator<ExistsUsernameValidator, String>  {
 
     @Autowired
     private IUserService service;
@@ -19,6 +21,17 @@ public class CheckExistsUsernamevalidator implements ConstraintValidator<ExistsU
 
     @Override
     public boolean isValid(String username, ConstraintValidatorContext constraintValidatorContext) {
-        return service.findByUsername(username) == null;
+
+        boolean isValid = true;
+
+        try {
+            isValid = service.findByUsername(username) == null;
+        }catch (BusinessException b) {
+            return true;
+        }
+
+        return isValid;
     }
+
+
 }

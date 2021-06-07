@@ -8,7 +8,6 @@ import com.condomeasy.backend.dto.user.UserUpdatePasswordDTO;
 public interface IUserService {
 
 	UserDTO save(UserCreateDTO u);
-	UserDTO update(Integer id, UserUpdateDTO dto);
 
 	UserDTO findById(Integer id);
 	UserDTO findByUsername(String username);
@@ -16,9 +15,9 @@ public interface IUserService {
 	UserDTO findByEmail(String email);
 	UserDTO findByCredentials(String username, String password);
 
-
-	void delete(Integer id);
+	UserDTO update(Integer id, UserUpdateDTO dto);
 	void updatePassword(Integer id, UserUpdatePasswordDTO dto);
 
+	void delete(Integer id);
 
 }

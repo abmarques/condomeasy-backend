@@ -5,6 +5,7 @@ import com.condomeasy.backend.validator.annotation.UsernameValidator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+
 public class CheckUsernameValidator implements ConstraintValidator<UsernameValidator, String> {
 
     @Override

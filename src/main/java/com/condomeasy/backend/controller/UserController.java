@@ -2,7 +2,6 @@ package com.condomeasy.backend.controller;
 
 import com.condomeasy.backend.controller.base.BaseController;
 import com.condomeasy.backend.dto.user.UserCreateDTO;
-import com.condomeasy.backend.dto.user.UserDTO;
 import com.condomeasy.backend.dto.user.UserUpdateDTO;
 import com.condomeasy.backend.dto.user.UserUpdatePasswordDTO;
 import com.condomeasy.backend.response.Response;

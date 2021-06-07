@@ -2,8 +2,6 @@ package com.condomeasy.backend.dto.user;
 
 import com.condomeasy.backend.dto.base.BaseDTO;
 import com.condomeasy.backend.validator.annotation.EmailValidator;
-import com.condomeasy.backend.validator.annotation.ExistsEmailValidator;
-import com.condomeasy.backend.validator.annotation.ExistsUsernameValidator;
 import com.condomeasy.backend.validator.annotation.UsernameValidator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,7 +25,6 @@ public class UserUpdateDTO extends BaseDTO {
     private String status;
 
     @UsernameValidator
-    @ExistsUsernameValidator
     @NotEmpty(message = "Informe o usuário.")
     private String username;
 
@@ -38,7 +35,6 @@ public class UserUpdateDTO extends BaseDTO {
     private String telephone;
 
     @EmailValidator
-    @ExistsEmailValidator
     @NotEmpty(message = "Informe o email do usuário")
     private String email;
 

@@ -1,12 +1,15 @@
 package com.condomeasy.backend.validator;
 
+import com.condomeasy.backend.exception.BusinessException;
 import com.condomeasy.backend.service.IUserService;
 import com.condomeasy.backend.validator.annotation.ExistsEmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+@Component
 public class CheckExistsEmailvalidator implements ConstraintValidator<ExistsEmailValidator, String> {
 
     @Autowired
@@ -19,6 +22,16 @@ public class CheckExistsEmailvalidator implements ConstraintValidator<ExistsEmai
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
-        return service.findByEmail(email) == null;
+        boolean isValid = true;
+
+        try {
+            isValid  = service.findByEmail(email) == null;
+
+        }catch (BusinessException b) {
+            isValid = true;
+        }
+
+        return isValid;
     }
+
 }

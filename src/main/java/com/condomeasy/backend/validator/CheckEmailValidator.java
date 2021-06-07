@@ -17,13 +17,15 @@ public class CheckEmailValidator implements ConstraintValidator<EmailValidator, 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
 
+        boolean isValid = true;
+
         try {
             InternetAddress emailAddr = new InternetAddress(email);
             emailAddr.validate();
         } catch (AddressException e) {
-            return false;
+            isValid = false;
         }
 
-        return true;
+        return isValid;
     }
 }

@@ -1,15 +1,12 @@
 package com.condomeasy.backend.dto.user;
 
-import com.condomeasy.backend.dto.ProfileDTO;
 import com.condomeasy.backend.dto.base.BaseDTO;
-import com.condomeasy.backend.model.Profile;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data

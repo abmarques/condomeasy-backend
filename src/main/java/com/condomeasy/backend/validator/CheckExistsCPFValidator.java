@@ -1,5 +1,6 @@
 package com.condomeasy.backend.validator;
 
+import com.condomeasy.backend.exception.BusinessException;
 import com.condomeasy.backend.service.IUserService;
 import com.condomeasy.backend.validator.annotation.ExistsCPFValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +20,16 @@ public class CheckExistsCPFValidator implements ConstraintValidator<ExistsCPFVal
     @Override
     public boolean isValid(String cpf, ConstraintValidatorContext constraintContext) {
 
-        Boolean isValid = false;
+        boolean isValid = false;
 
         if(cpf.isEmpty()) {
             isValid = true;
         }
 
-        if (service.findByCPF(cpf) != null) {
-            isValid = false;
+        try {
+            isValid = service.findByCPF(cpf) == null;
+        }catch (BusinessException b) {
+            isValid = true;
         }
 
         return isValid;

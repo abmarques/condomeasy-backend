@@ -1,6 +1,6 @@
 package com.condomeasy.backend.validator.annotation;
 
-import com.condomeasy.backend.validator.CheckExistsUsernamevalidator;
+import com.condomeasy.backend.validator.CheckExistsUsernameValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -16,7 +16,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 @Retention(RUNTIME)
 @Target({ FIELD, ANNOTATION_TYPE })
-@Constraint(validatedBy = CheckExistsUsernamevalidator.class)
+@Constraint(validatedBy = CheckExistsUsernameValidator.class)
 public @interface ExistsUsernameValidator {
 
     String message() default INVALID_USERNAME;
