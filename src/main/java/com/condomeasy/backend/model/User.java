@@ -1,29 +1,19 @@
 package com.condomeasy.backend.model;
 
-import java.time.LocalDate;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.DynamicUpdate;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tb_usuario")
 @DynamicUpdate
 public class User {
@@ -45,7 +35,7 @@ public class User {
     @Column(name = "usuario")
     private String username;
 
-    @Column(name = "senha")
+    @Column(name = "senha", updatable = false)
     private String password;
 
     @Column(name = "cpf")
@@ -64,17 +54,20 @@ public class User {
     private String apartmentBlock;
 
     @Column(name = "data_cadastro")
-    private LocalDate registrationDate;
+    private LocalDateTime registrationDate;
 
     @Column(name = "data_ultima_atualizacao")
-    private LocalDate lastUpdateDate;
+    private LocalDateTime lastUpdateDate;
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @Column(name = "data_ultimo_login")
+    private LocalDateTime lastloginDate;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "perfil_id", referencedColumnName = "id", nullable = false)
     @Builder.Default
     private Profile profile = new Profile();
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "condominio_id", referencedColumnName = "id", nullable = false)
     @Builder.Default
     private Condominium condominium = new Condominium();

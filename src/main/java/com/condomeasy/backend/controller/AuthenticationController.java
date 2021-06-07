@@ -23,7 +23,7 @@ public class AuthenticationController {
     @PostMapping("/authenticate")
     public AuthenticationResponseDTO authenticate(@RequestBody AuthenticationRequestDTO authenticationRequestDto) throws Exception {
 
-        final UserDetails userDetails = defaultUserDetailsService.loadUserByUsernameAndPassoword(
+        final UserDetails userDetails = defaultUserDetailsService.loadUserByCredentials(
                 authenticationRequestDto.getUsername(), authenticationRequestDto.getPassword());
         final String token = jwtUtil.generateToken(userDetails);
 
