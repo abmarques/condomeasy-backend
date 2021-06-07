@@ -9,10 +9,16 @@ public interface IUserService {
 
 	UserDTO save(UserCreateDTO u);
 	UserDTO update(Integer id, UserUpdateDTO dto);
+
 	UserDTO findById(Integer id);
-	void delete(Integer id);
 	UserDTO findByUsername(String username);
+	UserDTO findByCPF(String cpf);
+	UserDTO findByEmail(String email);
 	UserDTO findByCredentials(String username, String password);
+
+
+	void delete(Integer id);
 	void updatePassword(Integer id, UserUpdatePasswordDTO dto);
+
 
 }

@@ -8,7 +8,6 @@ import com.condomeasy.backend.exception.BusinessException;
 import com.condomeasy.backend.mapper.UserMapper;
 import com.condomeasy.backend.repository.IUserRepository;
 import com.condomeasy.backend.service.IUserService;
-import com.condomeasy.backend.validator.impl.UserValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
-import static com.condomeasy.backend.constant.MessageBundle.BAD_CREDENTIALS;
+import static com.condomeasy.backend.constant.MessageBundle.INVALID_CREDENTIALS;
 import static com.condomeasy.backend.constant.MessageBundle.EMPTY_DATA;
 
 @Slf4j
@@ -28,9 +27,6 @@ public class UserService implements IUserService {
 	private IUserRepository repository;
 
 	@Autowired
-	private UserValidator userValidatorService;
-
-	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	@Override
@@ -39,8 +35,6 @@ public class UserService implements IUserService {
 		dto.setCpf(dto.getCpf().replaceAll("[^0-9]", ""));
 		dto.setRegistrationDate(LocalDateTime.now());
 		dto.setPassword(passwordEncoder.encode(dto.getPassword()));
-
-		userValidatorService.validateUserCreate(dto);
 
 		var model = repository.save(UserMapper.createDtoToModelMap(dto));
 
@@ -72,6 +66,26 @@ public class UserService implements IUserService {
 	}
 
 	@Override
+	public UserDTO findByCPF(String cpf) throws BusinessException {
+		var model = repository.findByCpf(cpf);
+		if (model.isEmpty()){
+			throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
+		}
+
+		return UserMapper.modelToDtoMap(model.get());
+	}
+
+	@Override
+	public UserDTO findByEmail(String email) throws BusinessException {
+		var model = repository.findByEmail(email);
+		if (model.isEmpty()){
+			throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
+		}
+
+		return UserMapper.modelToDtoMap(model.get());
+	}
+
+	@Override
 	public UserDTO findByCredentials(String username, String password) throws BusinessException {
 
 		var model = repository.findByUsername(username);
@@ -80,7 +94,7 @@ public class UserService implements IUserService {
 		}
 
 		if (!passwordEncoder.matches(password, model.get().getPassword())){
-			throw new BusinessException(BAD_CREDENTIALS, HttpStatus.BAD_REQUEST.value());
+			throw new BusinessException(INVALID_CREDENTIALS, HttpStatus.BAD_REQUEST.value());
 		}
 
 		return UserMapper.modelToDtoMap(model.get());
@@ -95,7 +109,7 @@ public class UserService implements IUserService {
 		}
 
 		if (!passwordEncoder.matches(dto.getOldPassword(), model.get().getPassword())){
-			throw new BusinessException(BAD_CREDENTIALS, HttpStatus.BAD_REQUEST.value());
+			throw new BusinessException(INVALID_CREDENTIALS, HttpStatus.BAD_REQUEST.value());
 		}
 
 		if (passwordEncoder.matches(dto.getNewPassword(), model.get().getPassword())){
@@ -116,11 +130,8 @@ public class UserService implements IUserService {
 			throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
 		}
 		
-		dto.setCpf(dto.getCpf().replaceAll("[^0-9]", ""));
 		dto.setLastUpdateDate(LocalDateTime.now());
 		dto.setId(data.get().getId());
-
-		userValidatorService.validateUserUpdate(dto, data.get());
 
 		var model = repository.save(UserMapper.updateDtoToModelMap(dto));
 

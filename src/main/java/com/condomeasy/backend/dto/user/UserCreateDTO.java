@@ -1,6 +1,7 @@
 package com.condomeasy.backend.dto.user;
 
 import com.condomeasy.backend.dto.base.DefaultDTO;
+import com.condomeasy.backend.validator.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +24,8 @@ public class UserCreateDTO extends DefaultDTO {
     @NotEmpty(message = "Informe o status do usuário.")
     private String status;
 
+    @UsernameValidator
+    @ExistsUsernameValidator
     @NotEmpty(message = "Informe o usuário.")
     @Length(min = 1, max = 20, message = "O usuário deve conter entre 1 a 20 caracteres.")
     private String username;
@@ -34,12 +37,16 @@ public class UserCreateDTO extends DefaultDTO {
     @NotEmpty(message = "Informe o sobrenome do usuário.")
     private String surname;
 
+    @CPFValidator
+    @ExistsCPFValidator
     @NotEmpty(message = "Informe o cpf do usuário.")
     private String cpf;
 
     @NotEmpty(message = "Informe o telefone do usuário")
     private String telephone;
 
+    @EmailValidator
+    @ExistsEmailValidator
     @NotEmpty(message = "Informe o email do usuário")
     private String email;
 

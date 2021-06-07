@@ -1,7 +1,10 @@
 package com.condomeasy.backend.dto.user;
 
-import com.condomeasy.backend.dto.ProfileDTO;
 import com.condomeasy.backend.dto.base.BaseDTO;
+import com.condomeasy.backend.validator.annotation.EmailValidator;
+import com.condomeasy.backend.validator.annotation.ExistsEmailValidator;
+import com.condomeasy.backend.validator.annotation.ExistsUsernameValidator;
+import com.condomeasy.backend.validator.annotation.UsernameValidator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +12,6 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -24,18 +26,19 @@ public class UserUpdateDTO extends BaseDTO {
     @NotEmpty(message = "Informe o status do usuário.")
     private String status;
 
+    @UsernameValidator
+    @ExistsUsernameValidator
     @NotEmpty(message = "Informe o usuário.")
     private String username;
 
     @NotEmpty(message = "Informe o sobrenome do usuário.")
     private String surname;
 
-    @NotEmpty(message = "Informe o cpf do usuário.")
-    private String cpf;
-
     @NotEmpty(message = "Informe o telefone do usuário")
     private String telephone;
 
+    @EmailValidator
+    @ExistsEmailValidator
     @NotEmpty(message = "Informe o email do usuário")
     private String email;
 
