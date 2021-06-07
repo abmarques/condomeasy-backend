@@ -1,5 +1,6 @@
 package com.condomeasy.backend.dto;
 
+import com.condomeasy.backend.dto.user.UserDTO;
 import com.condomeasy.backend.model.Category;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,9 +29,9 @@ public class AdvertisementDTO {
     private BigDecimal value;
 
     @NotNull(message = "Informe a categoria do anúncio.")
-    private Category category;
+    private CategoryDTO category;
 
     @NotNull(message = "Informe o id do usuário do anúncio.")
-    private Integer userId;
+    private UserDTO user;
 
 }
