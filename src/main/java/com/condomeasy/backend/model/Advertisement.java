@@ -32,10 +32,12 @@ public class Advertisement {
 
     @ManyToOne()
     @JoinColumn(name = "categoria_id", referencedColumnName = "id")
-    private Category category;
+    @Builder.Default
+    private Category category = new Category();
 
     @ManyToOne()
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
-    private User user;
+    @Builder.Default
+    private User user = new User();
 
 }

@@ -7,14 +7,13 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tb_usuario")
 @DynamicUpdate
 public class User {
