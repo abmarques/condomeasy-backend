@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.condomeasy.backend.constant.MessageBundle.EMPTY_DATA;
-import static com.condomeasy.backend.constant.MessageBundle.INTERNAL_ERROR;
 
 @Slf4j
 @Service
@@ -26,8 +26,9 @@ public class AdvertisementService implements IAdvertisementService {
     public List<AdvertisementDTO> findAll() throws BusinessException {
         var modelList = repository.findAll();
 
-        if (modelList.isEmpty())
-            throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
+        if (modelList.isEmpty()) {
+            return new ArrayList<>();
+        }
 
         return AdvertisementMapper.modelListToDtoListMap(modelList);
     }
@@ -36,8 +37,9 @@ public class AdvertisementService implements IAdvertisementService {
     public AdvertisementDTO findById(Integer id) throws BusinessException{
         var model = repository.findById(id);
 
-        if (model.isEmpty())
+        if (model.isEmpty()){
             throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
+        }
 
        return AdvertisementMapper.modelToDtoMap(model.get());
     }
@@ -46,9 +48,6 @@ public class AdvertisementService implements IAdvertisementService {
     public AdvertisementDTO save(AdvertisementDTO dto) throws BusinessException {
         var model = repository.save(AdvertisementMapper.dtoToModelMap(dto));
 
-        if(model == null)
-            throw new BusinessException(INTERNAL_ERROR);
-
         return AdvertisementMapper.modelToDtoMap(model);
     }
 
@@ -56,8 +55,9 @@ public class AdvertisementService implements IAdvertisementService {
     public AdvertisementDTO update(AdvertisementDTO dto, Integer id) throws BusinessException {
         var data = repository.findById(id);
 
-        if (data.isEmpty())
+        if (data.isEmpty()){
             throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
+        }
 
         dto.setId(data.get().getId());
         var model = repository.save(AdvertisementMapper.dtoToModelMap(dto));
@@ -71,8 +71,9 @@ public class AdvertisementService implements IAdvertisementService {
     public void delete(Integer id) throws BusinessException {
         var data = repository.findById(id);
 
-        if (data.isEmpty())
+        if (data.isEmpty()){
             throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
+        }
 
         repository.delete(data.get());
 
