@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.condomeasy.backend.constant.MessageBundle.EMPTY_DATA;
-import static com.condomeasy.backend.constant.MessageBundle.INTERNAL_ERROR;
 
 @Slf4j
 @Service

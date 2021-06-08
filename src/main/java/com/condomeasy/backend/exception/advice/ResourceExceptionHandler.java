@@ -24,7 +24,7 @@ public class ResourceExceptionHandler {
 		response.setDateTime(LocalDateTime.now());
 		response.getErrors().add(e.getMessage());
 
-		return ResponseEntity.badRequest().body(response);
+		return ResponseEntity.status(e.getStatus()).body(response);
 	}
 
 }
