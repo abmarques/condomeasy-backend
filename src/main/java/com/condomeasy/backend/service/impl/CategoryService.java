@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.condomeasy.backend.constant.MessageBundle.EMPTY_DATA;
@@ -24,16 +25,20 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public List<CategoryDTO> findAll() throws BusinessException {
+
         var modelList = repository.findAll();
-        if(modelList.isEmpty()) throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
+
+        if(modelList.isEmpty()){
+            return new ArrayList<>();
+        }
 
         return CategoryMapper.modelListToDtoListMap(modelList);
     }
 
     @Override
     public CategoryDTO save(CategoryDTO dto) throws BusinessException {
+
         var model = repository.save(CategoryMapper.dtoToModelMap(dto));
-        if(model == null) throw new BusinessException(INTERNAL_ERROR);
 
         log.info(String.format("Category '%s' saved successfully.", model.getName()));
 
@@ -42,21 +47,27 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public CategoryDTO findById(Integer id) {
+
         var model = repository.findById(id);
-        if(model.isEmpty()) throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
+
+        if(model.isEmpty()) {
+            throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
+        }
 
         return CategoryMapper.modelToDtoMap(model.get());
     }
 
     @Override
     public CategoryDTO update(CategoryDTO dto, Integer id) {
+
         var data = repository.findById(id);
-        if(data.isEmpty()) throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
+
+        if(data.isEmpty()) {
+            throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
+        }
 
         dto.setId(data.get().getId());
         var model = repository.save(CategoryMapper.dtoToModelMap(dto));
-
-        if(model == null) throw new BusinessException(INTERNAL_ERROR);
 
         log.info(String.format("Category '%s' updated successfully.", model.getName()));
 
@@ -66,7 +77,10 @@ public class CategoryService implements ICategoryService {
     @Override
     public void delete(Integer id) {
         var data = repository.findById(id);
-        if(data.isEmpty()) throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
+
+        if(data.isEmpty()) {
+            throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
+        }
 
         repository.delete(data.get());
 

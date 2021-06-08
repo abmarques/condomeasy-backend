@@ -16,6 +16,7 @@ public class Response {
 
 	private Integer status;
 	private LocalDateTime dateTime;
+	@JsonInclude
 	private Object data;
 	private String message;
 	private List<String> errors;
