@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.condomeasy.backend.constant.MessageBundle.EMPTY_DATA;
@@ -26,8 +27,9 @@ public class CondominiumService implements ICondominiumService {
     public List<CondominiumDTO> findAll() throws BusinessException {
         var modelList=  repository.findAll();
 
-        if (modelList.isEmpty())
-            throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
+        if (modelList.isEmpty()){
+            return new ArrayList<>();
+        }
 
         return CondominiumMapper.modelListToDtoListMap(modelList);
     }
