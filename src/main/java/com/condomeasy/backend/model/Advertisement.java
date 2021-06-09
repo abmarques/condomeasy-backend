@@ -30,6 +30,9 @@ public class Advertisement {
     @Column(name = "valor")
     private BigDecimal value;
 
+    @Column(name = "url_imagem")
+    private String ImageUrl;
+
     @ManyToOne()
     @JoinColumn(name = "categoria_id", referencedColumnName = "id")
     @Builder.Default

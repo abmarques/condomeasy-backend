@@ -24,6 +24,7 @@ public class AdvertisementService implements IAdvertisementService {
 
     @Override
     public List<AdvertisementDTO> findAll() throws BusinessException {
+
         var modelList = repository.findAll();
 
         if (modelList.isEmpty()) {
@@ -35,6 +36,7 @@ public class AdvertisementService implements IAdvertisementService {
 
     @Override
     public AdvertisementDTO findById(Integer id) throws BusinessException{
+
         var model = repository.findById(id);
 
         if (model.isEmpty()){
@@ -46,6 +48,7 @@ public class AdvertisementService implements IAdvertisementService {
 
     @Override
     public AdvertisementDTO save(AdvertisementDTO dto) throws BusinessException {
+
         var model = repository.save(AdvertisementMapper.dtoToModelMap(dto));
 
         return AdvertisementMapper.modelToDtoMap(model);
@@ -53,6 +56,7 @@ public class AdvertisementService implements IAdvertisementService {
 
     @Override
     public AdvertisementDTO update(AdvertisementDTO dto, Integer id) throws BusinessException {
+
         var data = repository.findById(id);
 
         if (data.isEmpty()){
@@ -69,6 +73,7 @@ public class AdvertisementService implements IAdvertisementService {
 
     @Override
     public void delete(Integer id) throws BusinessException {
+
         var data = repository.findById(id);
 
         if (data.isEmpty()){
