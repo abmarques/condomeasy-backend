@@ -11,4 +11,5 @@ public class MessageBundle {
     public static final String INVALID_EMAIL = "E-mail inválido/já existe.";
     public static final String INVALID_USERNAME = "Usuário inválido/já existe.";
 
+    public static final String INVALID_USER = "Usuário inválido/não existe.";
 }

@@ -52,51 +52,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "Gerar Token Copy",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"if (pm.response.to.have.status(200)) {\r",
-									"    var jsonData = JSON.parse(responseBody);\r",
-									"    pm.environment.set(\"x-api-token\", jsonData.access_token)\r",
-									"}"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url_bff}}/condomeasy-backend-api/v1/authenticate",
-							"host": [
-								"{{url_bff}}"
-							],
-							"path": [
-								"condomeasy-backend-api",
-								"v1",
-								"authenticate"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -131,7 +86,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url_bff}}/condomeasy-backend-api/v1/advertisement/2",
+									"raw": "{{url_bff}}/condomeasy-backend-api/v1/advertisement/6",
 									"host": [
 										"{{url_bff}}"
 									],
@@ -139,7 +94,7 @@
 										"condomeasy-backend-api",
 										"v1",
 										"advertisement",
-										"2"
+										"6"
 									]
 								}
 							},
@@ -152,7 +107,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Refeição e Janta 2\",\r\n    \"description\": \"Almoço e Janta na hora.\",\r\n    \"value\": 100.00,\r\n    \"category\": {\r\n        \"id\": 8,\r\n        \"name\": \"Comida\"\r\n    },\r\n    \"user\": {\r\n        \"id\": 2\r\n    }\r\n}",
+									"raw": "{\r\n    \"name\": \"Refeição e Janta 2\",\r\n    \"description\": \"Almoço e Janta na hora.\",\r\n    \"value\": 100.00,\r\n    \"category\": {\r\n        \"id\": 8,\r\n        \"name\": \"Comida\"\r\n    },\r\n    \"user\": {\r\n        \"id\": 1\r\n    },\r\n    \"imageUrl\": \"http://161.97.107.158:7777/162319757492444367154717.png\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -180,7 +135,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Refeição e Janta 2\",\r\n    \"description\": \"Almoço e Janta na hora.\",\r\n    \"value\": 100.00,\r\n    \"category\": {\r\n        \"id\": 8,\r\n        \"name\": null\r\n    },\r\n    \"user\": {\r\n        \"id\": 20,\r\n        \"name\": null,\r\n        \"status\": null,\r\n        \"username\": null,\r\n        \"surname\": null,\r\n        \"cpf\": null,\r\n        \"telephone\": null,\r\n        \"email\": null,\r\n        \"apartmentNumber\": null,\r\n        \"apartmentBlock\": null,\r\n        \"registrationDate\": null,\r\n        \"lastUpdateDate\": null,\r\n        \"lastLoginDate\": null,\r\n        \"profileId\": null,\r\n        \"condominiumId\": null\r\n    }\r\n}",
+									"raw": "{\r\n    \"name\": \"Refeição e Janta 2\",\r\n    \"description\": \"Almoço e Janta na hora.\",\r\n    \"value\": 100.00,\r\n    \"category\": {\r\n        \"id\": 8,\r\n        \"name\": null\r\n    },\r\n    \"user\": {\r\n        \"id\": 4\r\n    },\r\n    \"imageUrl\": \"http://161.97.107.158:7777/162319757492444367154717.png\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -188,7 +143,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{url_bff}}/condomeasy-backend-api/v1/advertisement/7",
+									"raw": "{{url_bff}}/condomeasy-backend-api/v1/advertisement/1",
 									"host": [
 										"{{url_bff}}"
 									],
@@ -196,7 +151,7 @@
 										"condomeasy-backend-api",
 										"v1",
 										"advertisement",
-										"7"
+										"1"
 									]
 								}
 							},
@@ -300,9 +255,6 @@
 						{
 							"name": "Condominiums",
 							"request": {
-								"auth": {
-									"type": "noauth"
-								},
 								"method": "GET",
 								"header": [
 									{
@@ -313,9 +265,9 @@
 									}
 								],
 								"url": {
-									"raw": "{{localhost_url}}/condomeasy-backend-api/v1/condominium",
+									"raw": "{{url_bff}}/condomeasy-backend-api/v1/condominium",
 									"host": [
-										"{{localhost_url}}"
+										"{{url_bff}}"
 									],
 									"path": [
 										"condomeasy-backend-api",
@@ -463,9 +415,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{localhost_url}}/condomeasy-backend-api/v1/category",
+									"raw": "{{url_bff}}/condomeasy-backend-api/v1/category",
 									"host": [
-										"{{localhost_url}}"
+										"{{url_bff}}"
 									],
 									"path": [
 										"condomeasy-backend-api",
@@ -632,7 +584,7 @@
 							"response": []
 						},
 						{
-							"name": "User",
+							"name": "User by Id",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -646,6 +598,27 @@
 										"v1",
 										"user",
 										"24"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User by Username",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url_bff}}/condomeasy-backend-api/v1/user/username/user",
+									"host": [
+										"{{url_bff}}"
+									],
+									"path": [
+										"condomeasy-backend-api",
+										"v1",
+										"user",
+										"username",
+										"user"
 									]
 								}
 							},
@@ -681,43 +654,16 @@
 							"response": []
 						},
 						{
-							"name": "User Password",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n   \"oldPassword\": \"maria1234\",\r\n   \"newPassword\": \"maria12345\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{url_bff}}/condomeasy-backend-api/v1/user/password/27",
-									"host": [
-										"{{url_bff}}"
-									],
-									"path": [
-										"condomeasy-backend-api",
-										"v1",
-										"user",
-										"password",
-										"27"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "User",
 							"request": {
+								"auth": {
+									"type": "noauth"
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Joãozinho Novo na Area\",\r\n    \"status\": \"AT\",\r\n    \"username\": \"joazinhoooooas\",\r\n    \"password\": \"maria123\",\r\n    \"surname\": \"Pereira\",\r\n    \"cpf\": \"09094246406\",\r\n    \"telephone\": \"81999999999\",\r\n    \"email\": \"joazinho12345997as@gmail.com\",\r\n    \"apartmentNumber\": \"200\",\r\n    \"apartmentBlock\": \"2\",\r\n    \"registrationDate\": null,\r\n    \"lastUpdateDate\": null,\r\n    \"profileId\": 1,\r\n    \"condominiumId\": 1\r\n}",
+									"raw": "{\r\n    \"name\": \"Admin\",\r\n    \"status\": \"AT\",\r\n    \"username\": \"user\",\r\n    \"password\": \"12345678\",\r\n    \"surname\": \"Pereira\",\r\n    \"cpf\": \"92487218002\",\r\n    \"telephone\": \"81999999999\",\r\n    \"email\": \"admins@gmail.com\",\r\n    \"apartmentNumber\": \"200\",\r\n    \"apartmentBlock\": \"2\",\r\n    \"registrationDate\": null,\r\n    \"lastUpdateDate\": null,\r\n    \"profileId\": 1,\r\n    \"condominiumId\": 1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -757,6 +703,41 @@
 									""
 								]
 							}
+						}
+					]
+				},
+				{
+					"name": "Password",
+					"item": [
+						{
+							"name": "User Password",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"oldPassword\": \"maria1234\",\r\n   \"newPassword\": \"maria12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_bff}}/condomeasy-backend-api/v1/user/password/27",
+									"host": [
+										"{{url_bff}}"
+									],
+									"path": [
+										"condomeasy-backend-api",
+										"v1",
+										"user",
+										"password",
+										"27"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				}
