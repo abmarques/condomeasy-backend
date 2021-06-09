@@ -34,4 +34,7 @@ public class AdvertisementDTO {
     @NotNull(message = "Informe o id do usuário do anúncio.")
     private UserDTO user;
 
+    @NotNull(message = "Adicione uma imagem no anúncio.")
+    private String imageUrl;
+
 }
