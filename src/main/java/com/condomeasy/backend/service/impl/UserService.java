@@ -17,8 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
-import static com.condomeasy.backend.constant.MessageBundle.EMPTY_DATA;
-import static com.condomeasy.backend.constant.MessageBundle.INVALID_CREDENTIALS;
+import static com.condomeasy.backend.constant.MessageBundle.*;
 
 @Slf4j
 @Service
@@ -33,8 +32,15 @@ public class UserService implements IUserService {
 	@Autowired
 	private CheckUserUpdateValidator updateValidator;
 
+	@Autowired
+	private CondominiumService condominiumService;
+
 	@Override
 	public UserDTO save(UserCreateDTO dto) throws BusinessException {
+
+		if(condominiumService.findById(dto.getCondominiumId()) == null) {
+			throw new BusinessException(INVALID_CONDOMINIUM, HttpStatus.NOT_FOUND.value());
+		}
 
 		dto.setCpf(dto.getCpf().replaceAll("[^0-9]", ""));
 		dto.setRegistrationDate(LocalDateTime.now());
