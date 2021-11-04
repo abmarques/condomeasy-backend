@@ -69,7 +69,7 @@ public class UserService implements IUserService {
 
 		var model = repository.findByUsername(username);
 		if (model.isEmpty()) {
-			throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
+			throw new BusinessException(INVALID_CREDENTIALS, HttpStatus.NOT_FOUND.value());
 		}
 
 		return UserMapper.modelToDtoMap(model.get());
@@ -78,16 +78,13 @@ public class UserService implements IUserService {
 	@Override
 	public UserDTO findByCredentials(String username, String password) throws BusinessException {
 
-		var model = repository.findByUsername(username);
-		if(model.isEmpty()) {
-			throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
-		}
+		var userDTO = this.findByUsername(username);
 
-		if (!passwordEncoder.matches(password, model.get().getPassword())){
+		if (!passwordEncoder.matches(password, userDTO.getPassword())){
 			throw new BusinessException(INVALID_CREDENTIALS, HttpStatus.BAD_REQUEST.value());
 		}
 
-		return UserMapper.modelToDtoMap(model.get());
+		return userDTO;
 	}
 
 	@Override

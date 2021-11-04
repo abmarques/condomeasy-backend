@@ -31,10 +31,6 @@ public class AuthenticationController {
     @PostMapping("/authenticate")
     public AuthenticationResponseDTO authenticate(@RequestBody AuthenticationRequestDTO authenticationRequestDto) throws Exception {
 
-        if(userService.findByUsername(authenticationRequestDto.getUsername()) == null) {
-            throw new BusinessException(INVALID_CREDENTIALS, HttpStatus.BAD_REQUEST.value());
-        }
-
         final UserDetails userDetails = defaultUserDetailsService.loadUserByCredentials(
                 authenticationRequestDto.getUsername(), authenticationRequestDto.getPassword());
         final String token = jwtUtil.generateToken(userDetails);
