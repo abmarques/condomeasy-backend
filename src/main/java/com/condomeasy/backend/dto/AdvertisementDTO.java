@@ -25,7 +25,6 @@ public class AdvertisementDTO {
     @NotEmpty(message = "Informe a descrição do anúncio.")
     private String description;
 
-    @NotNull(message = "Informe o valor do anúncio.")
     private BigDecimal value;
 
     @NotNull(message = "Informe a categoria do anúncio.")
