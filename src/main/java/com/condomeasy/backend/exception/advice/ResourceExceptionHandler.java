@@ -20,7 +20,7 @@ public class ResourceExceptionHandler {
 		Response response = new Response();
 
 		response.setStatus(e.getStatus());
-		response.setMessage(e.getMessage());
+		response.setMessage(INTERNAL_ERROR);
 		response.setDateTime(LocalDateTime.now());
 		response.getErrors().add(e.getMessage());
 

@@ -13,7 +13,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.condomeasy.backend.constant.MessageBundle.*;
+import static com.condomeasy.backend.constant.MessageBundle.EMPTY_DATA;
+import static com.condomeasy.backend.constant.MessageBundle.INTERNAL_ERROR;
 
 @Slf4j
 @Service
@@ -50,7 +51,7 @@ public class CondominiumService implements ICondominiumService {
         var model = repository.findById(id);
 
         if(model.isEmpty())
-            throw new BusinessException(INVALID_CONDOMINIUM, HttpStatus.NOT_FOUND.value());
+            throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
 
         return CondominiumMapper.modelToDtoMap(model.get());
     }
@@ -60,7 +61,7 @@ public class CondominiumService implements ICondominiumService {
        var model = repository.findByName(name);
 
        if (model.isEmpty())
-           throw new BusinessException(INVALID_CONDOMINIUM, HttpStatus.NOT_FOUND.value());
+           throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
 
        return CondominiumMapper.modelToDtoMap(model.get());
     }
