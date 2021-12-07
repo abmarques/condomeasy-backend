@@ -17,7 +17,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
-import static com.condomeasy.backend.constant.MessageBundle.*;
+import static com.condomeasy.backend.constant.MessageBundle.EMPTY_DATA;
+import static com.condomeasy.backend.constant.MessageBundle.INVALID_CREDENTIALS;
 
 @Slf4j
 @Service
@@ -32,15 +33,8 @@ public class UserService implements IUserService {
 	@Autowired
 	private CheckUserUpdateValidator updateValidator;
 
-	@Autowired
-	private CondominiumService condominiumService;
-
 	@Override
 	public UserDTO save(UserCreateDTO dto) throws BusinessException {
-
-		if(condominiumService.findById(dto.getCondominiumId()) == null) {
-			throw new BusinessException(INVALID_CONDOMINIUM, HttpStatus.NOT_FOUND.value());
-		}
 
 		dto.setCpf(dto.getCpf().replaceAll("[^0-9]", ""));
 		dto.setRegistrationDate(LocalDateTime.now());
@@ -69,7 +63,7 @@ public class UserService implements IUserService {
 
 		var model = repository.findByUsername(username);
 		if (model.isEmpty()) {
-			throw new BusinessException(INVALID_CREDENTIALS, HttpStatus.NOT_FOUND.value());
+			throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
 		}
 
 		return UserMapper.modelToDtoMap(model.get());
@@ -78,13 +72,16 @@ public class UserService implements IUserService {
 	@Override
 	public UserDTO findByCredentials(String username, String password) throws BusinessException {
 
-		var userDTO = this.findByUsername(username);
+		var model = repository.findByUsername(username);
+		if(model.isEmpty()) {
+			throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
+		}
 
-		if (!passwordEncoder.matches(password, userDTO.getPassword())){
+		if (!passwordEncoder.matches(password, model.get().getPassword())){
 			throw new BusinessException(INVALID_CREDENTIALS, HttpStatus.BAD_REQUEST.value());
 		}
 
-		return userDTO;
+		return UserMapper.modelToDtoMap(model.get());
 	}
 
 	@Override
