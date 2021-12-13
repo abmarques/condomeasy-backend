@@ -45,6 +45,16 @@ public class AdvertisementService implements IAdvertisementService {
 
        return AdvertisementMapper.modelToDtoMap(model.get());
     }
+    
+    @Override
+    public List<AdvertisementDTO> findByCategoriaId(Integer id) throws BusinessException {
+        var modelList = repository.findByCategoryId(id);
+
+        if (modelList.isEmpty())
+            throw new BusinessException(EMPTY_DATA, HttpStatus.NOT_FOUND.value());
+
+        return AdvertisementMapper.modelListToDtoListMap(modelList);
+    }
 
     @Override
     public AdvertisementDTO save(AdvertisementDTO dto) throws BusinessException {
