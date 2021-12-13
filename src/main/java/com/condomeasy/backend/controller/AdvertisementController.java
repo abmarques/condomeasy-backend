@@ -38,6 +38,19 @@ public class AdvertisementController extends BaseController {
         URI location = getUri(responseData.getId());
         return ResponseEntity.created(location).body(response);
     }
+    
+    @GetMapping("byCategoria/{categoriaId}")
+    public ResponseEntity<Response> findByCategoriaId(@PathVariable("categoriaId") Integer id) {
+        var responseData = service.findByCategoriaId(id);
+
+        var response = Response.builder()
+                .status(200)
+                .dateTime(LocalDateTime.now())
+                .data(responseData)
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
 
     @GetMapping
     public ResponseEntity<Response> findAll() {
